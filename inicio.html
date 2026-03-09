@@ -10,175 +10,439 @@
             --azul-iparts: #002d55;
             --dorado-gold: #FFD700;
             --blanco: #ffffff;
-            --gris-fondo: #f8f9fa;
+            --gris-claro: #f8f9fa;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             margin: 0;
-            color: #333;
             background-color: var(--blanco);
+            overflow-x: hidden; /* Evita scrolls horizontales raros en animaciones */
         }
 
-        /* Header / Hero */
-        .hero {
-            background-color: var(--azul-iparts);
-            color: var(--blanco);
-            padding: 80px 20px;
-            text-align: center;
-            border-bottom: 8px solid var(--dorado-gold);
+        /* --- SISTEMA DE ANIMACIÓN (FLUÍDO) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+            will-change: opacity, transform;
         }
 
-        .hero h1 { font-size: 2.8rem; margin: 0; font-weight: 800; }
-        .hero p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 20px auto; }
-
-        .btn-main {
-            background-color: var(--dorado-gold);
-            color: var(--azul-iparts);
-            padding: 18px 35px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 50px;
-            display: inline-block;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: 0.3s;
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .btn-main:hover { transform: scale(1.05); background-color: #e6c200; }
+        /* Delay para cascada en tarjetas */
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
 
-        /* Características (Basado en el PRD) */
-        .features { padding: 60px 20px; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        
-        .feature-card { text-align: center; padding: 30px; border-radius: 15px; background: var(--gris-fondo); transition: 0.3s; }
-        .feature-card i { font-size: 2.5rem; color: var(--azul-iparts); margin-bottom: 20px; }
-        .feature-card h3 { margin-bottom: 10px; color: var(--azul-iparts); }
-
-        /* Sección de Planes */
-        .pricing { background-color: var(--azul-iparts); color: var(--blanco); padding: 80px 20px; text-align: center; }
-        .pricing h2 { font-size: 2.2rem; margin-bottom: 40px; }
-
-        .pricing-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; max-width: 1200px; margin: 0 auto; }
-        
-        .plan-card {
-            background: var(--blanco);
-            color: #333;
-            padding: 40px 30px;
-            border-radius: 20px;
-            width: 300px;
+        /* 1. NAVBAR */
+        .navbar {
+            padding: 12px 6%;
             display: flex;
-            flex-direction: column;
-            position: relative;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--blanco);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .plan-card.gold {
-            border: 4px solid var(--dorado-gold);
-            transform: scale(1.08);
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
         }
 
-        .gold-label {
+        .brand-logo {
+            width: 55px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .brand-name {
+            color: var(--azul-iparts);
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .nav-btn {
             background: var(--dorado-gold);
             color: var(--azul-iparts);
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 5px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        .price { font-size: 2.5rem; font-weight: bold; margin: 20px 0; color: var(--azul-iparts); }
-        .price span { font-size: 1rem; color: gray; }
-
-        ul { list-style: none; padding: 0; margin: 20px 0; text-align: left; }
-        ul li { margin-bottom: 12px; font-size: 0.95rem; }
-        ul li i { color: #2ecc71; margin-right: 10px; }
-
-        .btn-plan {
-            background: var(--azul-iparts);
-            color: var(--blanco);
-            padding: 12px;
+            padding: 10px 22px;
+            border-radius: 50px;
             text-decoration: none;
-            border-radius: 10px;
-            margin-top: auto;
-            font-weight: bold;
+            font-weight: 800;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .footer { padding: 40px; text-align: center; background: #f1f1f1; color: #666; font-size: 0.9rem; }
+        .nav-btn:hover { 
+            background: #e6c200; 
+            transform: translateY(-2px); 
+        }
+
+        /* 2. HERO SECTION */
+        .hero {
+            position: relative;
+            padding: 120px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            overflow: hidden;
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('assets/hero.jpg') no-repeat center center;
+            background-size: cover;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .hero-content { position: relative; z-index: 2; flex: 1; text-align: left; max-width: 600px; }
+        .hero h1 { font-size: 3.2rem; margin-bottom: 20px; font-weight: 800; line-height: 1.2; }
+        .hero p { font-size: 1.3rem; opacity: 0.8; margin-bottom: 30px; }
+
+        /* 3. CARRUSEL INFINITO */
+        .aliados-section {
+            padding: 50px 0;
+            background: var(--gris-claro);
+            overflow: hidden;
+            border-bottom: 1px solid #eee;
+        }
+
+        .slider {
+            display: flex;
+            width: calc(250px * 24);
+            animation: scroll 40s linear infinite;
+        }
+
+        .slide {
+            width: 180px;
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 15px;
+            margin: 0 15px;
+            padding: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .slide img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-180px * 12 - 30px * 12)); }
+        }
+
+        @media (max-width: 968px) {
+            .hero { flex-direction: column; text-align: center; padding: 80px 20px; }
+            .hero-content { text-align: center; max-width: 100%; }
+            .hero-mockup { justify-content: center; }
+            .hero h1 { font-size: 2.5rem; }
+        }
     </style>
 </head>
 <body>
 
-    <section class="hero">
-        <h1>iParts</h1>
-        <p>La red de repuestos más grande de Maracaibo en la palma de tu mano. Ubica, filtra y compra sin perder tiempo.</p>
-        <a href="#descargar" class="btn-main"><i class="fas fa-map-marked-alt"></i> EXPLORAR MAPA</a>
-    </section>
+    <nav class="navbar">
+        <a href="#" class="brand-container">
+            <img src="assets/icon.png" alt="iParts Logo" class="brand-logo">
+            <span class="brand-name">iParts</span>
+        </a>
+        <a href="https://wa.me/584127330382" class="nav-btn">Afiliar mi tienda</a>
+    </nav>
 
-    <section class="features">
-        <div class="feature-card">
-            <i class="fas fa-location-arrow"></i>
-            <h3>Geolocalización</h3>
-            <p>Encuentra tiendas abiertas cerca de ti en sectores como Indio Mara, Delicias y más.</p>
+    <header class="hero" style="position: relative; background: #1a1a1a; overflow: hidden;">
+        <div class="hero-bg" style="z-index: 1;"></div>
+        
+        <div class="hero-content reveal" style="position: relative; z-index: 5;">
+            <h1>Encuentra tus repuestos en minutos</h1>
+            <p>Las tiendas más importantes de Maracaibo en la palma de tu mano.</p>
+            <a href="https://wa.me/584127330382" class="nav-btn" style="padding: 14px 28px; font-size: 1rem;">Ver Tiendas en el Mapa</a>
         </div>
-        <div class="feature-card">
-            <i class="fas fa-tools"></i>
-            <h3>Marcas Específicas</h3>
-            <p>Filtra por especialidad: Caterpillar, Toyota, Chevrolet o repuestos eléctricos.</p>
-        </div>
-        <div class="feature-card">
-            <i class="fas fa-star"></i>
-            <h3>Reputación Real</h3>
-            <p>Sistema de calificación basado en experiencias de otros usuarios de la comunidad.</p>
-        </div>
-    </section>
-
-    <section class="pricing">
-        <h2>Planes para Tiendas</h2>
-        <div class="pricing-container">
-            <div class="plan-card">
-                <h3>Básico (Piloto)</h3>
-                <div class="price">$0<span>/mes</span></div>
-                <ul>
-                    <li><i class="fas fa-check"></i> Presencia en el mapa</li>
-                    <li><i class="fas fa-check"></i> Perfil de tienda básico</li>
-                    <li><i class="fas fa-check"></i> Enlace a WhatsApp</li>
-                </ul>
-                <a href="https://wa.me/tu_whatsapp" class="btn-plan">EMPEZAR GRATIS</a>
-            </div>
-
-            <div class="plan-card gold">
-                <div class="gold-label">MÁS POPULAR</div>
-                <h3>Plan GOLD</h3>
-                <div class="price">$20<span>/mes</span></div>
-                <ul>
-                    <li><i class="fas fa-check"></i> <strong>Recibe pedidos directos</strong></li>
-                    <li><i class="fas fa-check"></i> Posición prioritaria</li>
-                    <li><i class="fas fa-check"></i> Insignia de Verificado</li>
-                    <li><i class="fas fa-check"></i> Soporte VIP 24/7</li>
-                </ul>
-                <a href="https://wa.me/tu_whatsapp" class="btn-plan" style="background: var(--dorado-gold); color: var(--azul-iparts);">ACTIVAR GOLD</a>
-            </div>
-
-            <div class="plan-card">
-                <h3>Plan SILVER</h3>
-                <div class="price">$15<span>/mes</span></div>
-                <ul>
-                    <li><i class="fas fa-check"></i> Ofertas diarias</li>
-                    <li><i class="fas fa-check"></i> Visibilidad mejorada</li>
-                    <li><i class="fas fa-check"></i> Perfil con fotos</li>
-                </ul>
-                <a href="https://wa.me/tu_whatsapp" class="btn-plan">ELEGIR SILVER</a>
+    
+        <div class="hero-mockup reveal delay-1" style="position: relative; z-index: 10; isolation: isolate;">
+            <div style="width: 280px; height: 580px; 
+                        background: #000; /* Fondo negro sólido base */
+                        border: 10px solid #2a2a2a; 
+                        border-radius: 35px; 
+                        box-shadow: 0 30px 60px rgba(0,0,0,0.6); 
+                        overflow: hidden; 
+                        transform: rotate(-5deg); 
+                        backface-visibility: hidden; 
+                        will-change: transform;">
+                
+                <img src="assets/app_mapa.jpg" alt="Mapa iParts" 
+                     style="width: 100%; 
+                            height: 100%; 
+                            object-fit: cover; 
+                            display: block; 
+                            position: relative;
+                            z-index: 2;
+                            opacity: 1 !important; /* Forzamos opacidad total */
+                            image-rendering: high-quality;">
+                
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 1;"></div>
             </div>
         </div>
+    </header>
+    <section class="aliados-section">
+        <p style="text-align:center; color:#888; font-size:0.8rem; text-transform:uppercase; letter-spacing:2px; margin-bottom:30px;">Tiendas Aliadas</p>
+        <div class="slider">
+            <div class="slide"><img src="assets/assets logos/1002532040.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532050.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532077.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532079.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532485.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532508.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532553.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532558.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532560.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532604.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532616.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532634.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532040.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532050.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532077.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532079.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532485.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532508.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532553.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532558.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532560.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532604.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532616.png"></div>
+            <div class="slide"><img src="assets/assets logos/1002532634.png"></div>
+        </div>
     </section>
 
-    <footer class="footer">
-        <p><strong>ROD INVEST</strong> - Potenciando el mercado Diesel y Automotriz</p>
-        <p>© 2026 iParts Maracaibo. Todos los derechos reservados.</p>
+    <section style="padding: 80px 10%; background: #ffffff;">
+        <div class="reveal" style="text-align: center; margin-bottom: 50px;">
+            <h2 style="color: #002d55; font-size: 2.5rem; font-weight: 800;">¿Por qué iParts?</h2>
+            <p style="color: #666; max-width: 700px; margin: 0 auto; font-size: 1.1rem;">Optimizamos el mercado de repuestos eliminando las ineficiencias que te hacen perder tiempo y dinero.</p>
+        </div>
+    
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+            <div class="reveal" style="background: #f8f9fa; padding: 40px; border-radius: 20px; border-left: 5px solid #FFD700;">
+                <i class="fas fa-gas-pump" style="font-size: 2rem; color: #002d55; margin-bottom: 20px;"></i>
+                <h3 style="color: #002d55;">Adiós al gasto de gasolina</h3>
+                <p style="color: #555; line-height: 1.6;">No más vueltas al azar. Visualizas las opciones cerca de ti y solo enciendes el motor con certeza del stock.</p>
+            </div>
+            <div class="reveal delay-1" style="background: #f8f9fa; padding: 40px; border-radius: 20px; border-left: 5px solid #002d55;">
+                <i class="fas fa-clock" style="font-size: 2rem; color: #002d55; margin-bottom: 20px;"></i>
+                <h3 style="color: #002d55;">De horas a minutos</h3>
+                <p style="color: #555; line-height: 1.6;">Maquinaria parada es dinero perdido. iParts centraliza la oferta para encontrar componentes en tiempo récord.</p>
+            </div>
+            <div class="reveal delay-2" style="background: #f8f9fa; padding: 40px; border-radius: 20px; border-left: 5px solid #FFD700;">
+                <i class="fas fa-store" style="font-size: 2rem; color: #002d55; margin-bottom: 20px;"></i>
+                <h3 style="color: #002d55;">Inventario Centralizado</h3>
+                <p style="color: #555; line-height: 1.6;">Conectamos directamente al dueño del equipo con tiendas locales, facilitando cotizaciones inmediatas.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experiencia" style="padding: 100px 6%; background: #fdfdfd; text-align: center;">
+        <div class="reveal" style="margin-bottom: 60px;">
+            <h2 style="color: #002d55; font-size: 2.5rem; font-weight: 800; margin-bottom: 15px;">Explora la Experiencia iParts</h2>
+            <p style="color: #666; max-width: 750px; margin: 0 auto; font-size: 1.15rem;">Interfaz intuitiva diseñada para que tu búsqueda sea tan eficiente como tu maquinaria.</p>
+        </div>
+    
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 45px;">
+            <div class="reveal">
+                <div style="border: 10px solid #222; border-radius: 40px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.12); margin-bottom: 25px; max-width: 290px;">
+                    <img src="assets/captura_mapa_galeria.jpg" style="width: 100%; display: block;">
+                </div>
+                <h4 style="color: #002d55;">📍 Radar de Tiendas</h4>
+            </div>
+            <div class="reveal delay-1">
+                <div style="border: 10px solid #222; border-radius: 40px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.12); margin-bottom: 25px; max-width: 290px;">
+                    <img src="assets/captura_perfil.jpg" style="width: 100%; display: block;">
+                </div>
+                <h4 style="color: #002d55;">🏢 Perfil Profesional</h4>
+            </div>
+            <div class="reveal delay-2">
+                <div style="border: 10px solid #222; border-radius: 40px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.12); margin-bottom: 25px; max-width: 290px;">
+                    <img src="assets/captura_buscador.jpg" style="width: 100%; display: block;">
+                </div>
+                <h4 style="color: #002d55;">🔍 Filtros Rápidos</h4>
+            </div>
+        </div>
+    </section>
+
+    <section id="planes" style="padding: 80px 10%; background: #f4f7f9; text-align: center;">
+        <div class="reveal">
+            <h2 style="color: #002d55; font-size: 2.2rem; font-weight: 800; margin-bottom: 10px;">Haz crecer tu negocio con iParts</h2>
+            <p style="color: #666; margin-bottom: 50px;">Potencia la visibilidad de tu stock y conecta con clientes de alto valor.</p>
+        </div>
+    
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+            <div class="reveal" style="background: white; padding: 40px; border-radius: 20px; width: 290px; border-top: 5px solid #bdc3c7; display: flex; flex-direction: column;">
+                <h3 style="color: #666;">Básico</h3>
+                <div style="font-size: 2.2rem; font-weight: 900; margin: 15px 0; color: #002d55;">$0</div>
+                <ul style="text-align: left; font-size: 0.9rem; list-style: none; padding: 0; flex-grow: 1; line-height: 2;">
+                    <li>📍 Visibilidad en el Mapa</li>
+                    <li>🛠️ Perfil Comercial</li>
+                    <li>⭐ Sistema de Reseñas</li>
+                    <li>📲 WhatsApp Directo</li>
+                </ul>
+                <a href="https://wa.me/584127330382" class="nav-btn">EMPEZAR GRATIS</a>
+            </div>
+            <div class="reveal delay-1" style="background: white; padding: 40px; border-radius: 20px; width: 290px; border-top: 5px solid #002d55; transform: scale(1.05); z-index: 1; position: relative; display: flex; flex-direction: column;">
+                <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #002d55; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.7rem; font-weight: bold;">RECOMENDADO</div>
+                <h3 style="color: #002d55;">SILVER</h3>
+                <div style="font-size: 1.2rem; font-weight: bold; margin: 15px 0;">IDEAL PARA VENTAS</div>
+                <ul style="text-align: left; font-size: 0.9rem; list-style: none; padding: 0; flex-grow: 1; line-height: 2;">
+                    <li>✅ Todo lo del plan Básico</li>
+                    <li>📸 Vitrina de Ofertas Diarias</li>
+                    <li>🌟 Pin destacado</li>
+                    <li>🎧 Soporte Directo</li>
+                </ul>
+                <a href="https://wa.me/584127330382" class="nav-btn" style="background:#002d55; color:white;">SOLICITAR INFO</a>
+            </div>
+            <div class="reveal delay-2" style="background: white; padding: 40px; border-radius: 20px; width: 290px; border: 2px solid #FFD700; display: flex; flex-direction: column;">
+                <h3 style="color: #b8860b;">GOLD</h3>
+                <div style="font-size: 1.2rem; font-weight: bold; margin: 15px 0;">MÁXIMO PODER</div>
+                <ul style="text-align: left; font-size: 0.9rem; list-style: none; padding: 0; flex-grow: 1; line-height: 2;">
+                    <li>✅ Todo lo de los planes anteriores</li>
+                    <li>🔔 Recibe pedidos específicos</li>
+                    <li>💎 Perfil Premium</li>
+                    <li>📊 Métricas de mercado</li>
+                </ul>
+                <a href="https://wa.me/584127330382" class="nav-btn">CONSULTAR CUPO</a>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: #002d55; color: white; padding: 80px 6% 40px; text-align: center;">
+        <div class="reveal" style="margin-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 60px;">
+            <h2 style="font-size: 2.5rem; color: #FFD700;">¿Listo para optimizar tu búsqueda?</h2>
+            <p style="margin-bottom: 30px; opacity: 0.9;">Únete a la red de repuestos más inteligente de Maracaibo.</p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+                <a href="https://wa.me/584127330382" class="nav-btn">Afiliar mi Tienda</a>
+                <a href="javascript:void(0)" class="nav-btn secondary" 
+                onclick="alert('¡Estamos afinando los motores! iParts estará disponible muy pronto en Play Store y App Store. Actualmente estamos en fase de pruebas finales.')"
+                style="padding: 14px 28px; font-size: 1rem; opacity: 0.8; cursor: help;">
+                Próximamente en Play Store
+             </a>
+            </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-around; gap: 40px; text-align: left;">
+            <div>
+                <h3 style="color: #FFD700;">iParts</h3>
+                <p style="max-width: 250px; opacity: 0.7;">Tecnología de geolocalización para la industria de repuestos.</p>
+            </div>
+            <div>
+                <h4>Soporte</h4>
+                <p>📧 soporte@infoiparts.lat</p>
+                <p>📲 +58 412-7330382</p>
+            </div>
+        </div>
+        <p style="margin-top: 60px; opacity: 0.5;">© 2026 iParts. Todos los derechos reservados.</p>
     </footer>
 
+    <script>
+        const observerOptions = {
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
+
+<div id="notification-toast" style="position: fixed; bottom: 20px; left: 20px; background: white; padding: 15px 20px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 15px; z-index: 9999; transform: translateY(150%); transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); border-left: 5px solid #FFD700; max-width: 320px; pointer-events: none;">
+    <div id="notif-icon-bg" style="background: #002d55; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <i class="fas fa-store" id="notif-icon" style="font-size: 0.9rem;"></i>
+    </div>
+    <div>
+        <p id="notif-text" style="margin: 0; font-size: 0.85rem; color: #333; line-height: 1.4;"></p>
+        <span id="notif-time" style="font-size: 0.7rem; color: #888; font-weight: 500;"></span>
+    </div>
+</div>
+
+<script>
+    const tiendas = [
+        "Filtros y Lubricantes El Puente",
+        "Répreca (Suplinca)",
+        "Moto Repuestos El Primo",
+        "Multiservicios Vehimax",
+        "Carlos Fuenmayor Repuestos Diesel",
+        "Taller J&C Especialistas en Chrysler",
+        "Tresna C.A",
+        "Repuestos RZ",
+        "Asia Motors",
+        "Embragues Luk",
+        "Electro Auto Los Olivos",
+        "Gruas RM2",
+        "Repuestos y accesorios Santa Clara"
+    ];
+
+    const variantes = [
+        { msg: "se acaba de afiliar a iParts.", label: "¡NUEVO!", icon: "fa-store-alt", color: "#FFD700" },
+        { msg: "ya es una Tienda Verificada.", label: "VERIFICADO", icon: "fa-check-circle", color: "#00c853" },
+        { msg: "actualizó su inventario.", label: "HACE 2 MIN", icon: "fa-sync-alt", color: "#002d55" },
+        { msg: "activó ofertas especiales.", label: "PROMO", icon: "fa-tag", color: "#d50000" }
+    ];
+
+    const toast = document.getElementById('notification-toast');
+    const text = document.getElementById('notif-text');
+    const timeLabel = document.getElementById('notif-time');
+    const icon = document.getElementById('notif-icon');
+    const iconBg = document.getElementById('notif-icon-bg');
+
+    function showNotification() {
+        const tienda = tiendas[Math.floor(Math.random() * tiendas.length)];
+        const variante = variantes[Math.floor(Math.random() * variantes.length)];
+        
+        // Inyectar datos
+        text.innerHTML = `<strong>${tienda}</strong> ${variante.msg}`;
+        timeLabel.innerText = variante.label;
+        toast.style.borderLeftColor = variante.color;
+        icon.className = `fas ${variante.icon}`;
+        
+        // Mostrar
+        toast.style.transform = "translateY(0)";
+        
+        // Ocultar después de 5.5 segundos
+        setTimeout(() => {
+            toast.style.transform = "translateY(150%)";
+        }, 5500);
+    }
+
+    // Sistema de tiempos aleatorios para que parezca humano
+    function triggerRandomly() {
+        // Entre 10 y 18 segundos para la próxima notificación
+        const randomDelay = Math.floor(Math.random() * (18000 - 10000) + 10000);
+        
+        setTimeout(() => {
+            showNotification();
+            triggerRandomly();
+        }, randomDelay);
+    }
+
+    // Primera aparición a los 4 segundos de carga
+    setTimeout(triggerRandomly, 4000);
+</script>
 </body>
 </html>
