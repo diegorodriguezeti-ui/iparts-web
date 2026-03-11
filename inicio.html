@@ -104,7 +104,7 @@
         .hero-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: url('assets/hero.jpg') no-repeat center center;
+            background: url('assets/hero.webp') no-repeat center center;
             background-size: cover;
             opacity: 0.3;
             z-index: 1;
@@ -186,7 +186,7 @@
                         backface-visibility: hidden; 
                         will-change: transform;">
                 
-                <img src="assets/app_mapa.jpg" alt="Mapa iParts" 
+                <img src="assets/app_mapa.webp" alt="Mapa iParts" 
                      style="width: 100%; 
                             height: 100%; 
                             object-fit: cover; 
@@ -200,35 +200,63 @@
             </div>
         </div>
     </header>
+    <style>
+        /* Animación del carrusel infinito */
+        .slider {
+            display: flex;
+            /* Ajustamos el ancho: 13 logos únicos x 2 (para el bucle) = 26 espacios */
+            width: calc(250px * 26); 
+            animation: scroll 45s linear infinite;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-250px * 13)); }
+        }
+        .slider:hover { animation-play-state: paused; }
+        .slide img { cursor: pointer; width: 150px; margin: 0 50px; transition: transform 0.3s; }
+        .slide img:hover { transform: scale(1.1); }
+    </style>
+    
     <section class="aliados-section">
         <p style="text-align:center; color:#888; font-size:0.8rem; text-transform:uppercase; letter-spacing:2px; margin-bottom:30px;">Tiendas Aliadas</p>
-        <div class="slider">
-            <div class="slide"><img src="assets/assets logos/1002532040.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532050.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532077.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532079.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532485.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532508.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532553.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532558.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532560.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532604.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532616.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532634.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532040.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532050.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532077.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532079.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532485.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532508.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532553.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532558.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532560.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532604.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532616.png"></div>
-            <div class="slide"><img src="assets/assets logos/1002532634.png"></div>
+        <div class="slider-container" style="overflow:hidden; padding: 20px 0;">
+            <div class="slider">
+                <div class="slide"><img src="assets/assets logos/logo1.png" onclick="mostrarFomo('Moto Repuestos El Primo')"></div>
+                <div class="slide"><img src="assets/assets logos/logo2.png" onclick="mostrarFomo('Embragues LUK')"></div>
+                <div class="slide"><img src="assets/assets logos/logo3.png" onclick="mostrarFomo('Emprendimiento Carlos Fuenmayor')"></div>
+                <div class="slide"><img src="assets/assets logos/logo4.png" onclick="mostrarFomo('Filtros y Lubricantes El Puente')"></div>
+                <div class="slide"><img src="assets/assets logos/logo5.png" onclick="mostrarFomo('Grúas RM2')"></div>
+                <div class="slide"><img src="assets/assets logos/logo6.png" onclick="mostrarFomo('Electro Auto Los Olivos')"></div>
+                <div class="slide"><img src="assets/assets logos/logo7.png" onclick="mostrarFomo('Multiservicios Vehimax')"></div>
+                <div class="slide"><img src="assets/assets logos/logo8.png" onclick="mostrarFomo('Repreca (Suplinca)')"></div>
+                <div class="slide"><img src="assets/assets logos/logo9.png" onclick="mostrarFomo('Repuestos RZ')"></div>
+                <div class="slide"><img src="assets/assets logos/logo10.png" onclick="mostrarFomo('Repuestos y Accesorios Santa Clara')"></div>
+                <div class="slide"><img src="assets/assets logos/logo11.png" onclick="mostrarFomo('Taller J&C')"></div>
+                <div class="slide"><img src="assets/assets logos/logo12.png" onclick="mostrarFomo('Tresna')"></div>
+                <div class="slide"><img src="assets/assets logos/logo13.png" onclick="mostrarFomo('Asia Motors')"></div>
+    
+                <div class="slide"><img src="assets/assets logos/logo1.png" onclick="mostrarFomo('Moto Repuestos El Primo')"></div>
+                <div class="slide"><img src="assets/assets logos/logo2.png" onclick="mostrarFomo('Embragues LUK')"></div>
+                <div class="slide"><img src="assets/assets logos/logo3.png" onclick="mostrarFomo('Emprendimiento Carlos Fuenmayor')"></div>
+                <div class="slide"><img src="assets/assets logos/logo4.png" onclick="mostrarFomo('Filtros y Lubricantes El Puente')"></div>
+                <div class="slide"><img src="assets/assets logos/logo5.png" onclick="mostrarFomo('Grúas RM2')"></div>
+                <div class="slide"><img src="assets/assets logos/logo6.png" onclick="mostrarFomo('Electro Auto Los Olivos')"></div>
+                <div class="slide"><img src="assets/assets logos/logo7.png" onclick="mostrarFomo('Multiservicios Vehimax')"></div>
+                <div class="slide"><img src="assets/assets logos/logo8.png" onclick="mostrarFomo('Repreca (Suplinca)')"></div>
+                <div class="slide"><img src="assets/assets logos/logo9.png" onclick="mostrarFomo('Repuestos RZ')"></div>
+                <div class="slide"><img src="assets/assets logos/logo10.png" onclick="mostrarFomo('Repuestos y Accesorios Santa Clara')"></div>
+                <div class="slide"><img src="assets/assets logos/logo11.png" onclick="mostrarFomo('Taller J&C')"></div>
+                <div class="slide"><img src="assets/assets logos/logo12.png" onclick="mostrarFomo('Tresna')"></div>
+                <div class="slide"><img src="assets/assets logos/logo13.png" onclick="mostrarFomo('Asia Motors')"></div>
+            </div>
         </div>
     </section>
+    
+    <script>
+        function mostrarFomo(tienda) {
+            alert(`¿Buscas repuestos en ${tienda}? \n\nEsta tienda tiene ofertas exclusivas solo para usuarios de la APP iParts. ¡Descárgala ahora!`);
+        }
+    </script>
 
     <section style="padding: 80px 10%; background: #ffffff;">
         <div class="reveal" style="text-align: center; margin-bottom: 50px;">
