@@ -3,45 +3,508 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iParts | Ubica tu Repuesto en Maracaibo</title>
     <link rel="icon" type="image/png" href="assets/icon.png?v=2">
-    <title>Términos y Condiciones - iParts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
-        h1 { color: #0056b3; border-bottom: 2px solid #0056b3; padding-bottom: 10px; }
-        h2 { color: #333; margin-top: 25px; border-left: 4px solid #0056b3; padding-left: 10px; }
-        p { margin-bottom: 15px; }
-        .version { font-weight: bold; color: #666; margin-bottom: 30px; }
-        .footer { font-size: 0.8em; color: #777; margin-top: 40px; border-top: 1px solid #ccc; padding-top: 10px; text-align: center; }
-        strong { color: #000; }
+        :root {
+            --azul-iparts: #002d55;
+            --dorado-gold: #FFD700;
+            --blanco: #ffffff;
+            --gris-claro: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            background-color: var(--blanco);
+            overflow-x: hidden; /* Evita scrolls horizontales raros en animaciones */
+        }
+
+        /* --- SISTEMA DE ANIMACIÓN (FLUÍDO) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Delay para cascada en tarjetas */
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+
+        /* 1. NAVBAR */
+        .navbar {
+            padding: 12px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--blanco);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .brand-logo {
+            width: 55px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .brand-name {
+            color: var(--azul-iparts);
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .nav-btn {
+            background: var(--dorado-gold);
+            color: var(--azul-iparts);
+            padding: 10px 22px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn:hover { 
+            background: #e6c200; 
+            transform: translateY(-2px); 
+        }
+
+        /* 2. HERO SECTION */
+        .hero {
+            position: relative;
+            padding: 120px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            overflow: hidden;
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('assets/hero.webp') no-repeat center center;
+            background-size: cover;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .hero-content { position: relative; z-index: 2; flex: 1; text-align: left; max-width: 600px; }
+        .hero h1 { font-size: 3.2rem; margin-bottom: 20px; font-weight: 800; line-height: 1.2; }
+        .hero p { font-size: 1.3rem; opacity: 0.8; margin-bottom: 30px; }
+
+        /* 3. CARRUSEL INFINITO */
+        .aliados-section {
+            padding: 50px 0;
+            background: var(--gris-claro);
+            overflow: hidden;
+            border-bottom: 1px solid #eee;
+        }
+
+        .slider {
+            display: flex;
+            width: calc(250px * 24);
+            animation: scroll 40s linear infinite;
+        }
+
+        .slide {
+            width: 180px;
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 15px;
+            margin: 0 15px;
+            padding: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .slide img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-180px * 12 - 30px * 12)); }
+        }
+
+        @media (max-width: 968px) {
+            .hero { flex-direction: column; text-align: center; padding: 80px 20px; }
+            .hero-content { text-align: center; max-width: 100%; }
+            .hero-mockup { justify-content: center; }
+            .hero h1 { font-size: 2.5rem; }
+        }
     </style>
 </head>
 <body>
 
-    <h1>TÉRMINOS Y CONDICIONES DE USO - IPARTS</h1>
-    <p class="version">Versión 1.1 (MVP) | Última actualización: Febrero 2026</p>
+    <nav class="navbar">
+        <a href="#" class="brand-container">
+            <img src="assets/icon.png" alt="iParts Logo" class="brand-logo">
+            <span class="brand-name">iParts</span>
+        </a>
+        <a href="https://wa.me/584127330382?text=Hola,%20quiero%20afiliar%20mi%20tienda%20a%20iParts." class="nav-btn">Afiliar mi tienda</a>
+    </nav>
 
-    <h2>1. Naturaleza del Servicio e Intermediación</h2>
-    <p>iParts es una plataforma tecnológica en fase de lanzamiento (MVP) diseñada para facilitar la ubicación de comercios de repuestos automotrices mediante herramientas de geolocalización. iParts actúa exclusivamente como un <strong>directorio digital de visibilidad</strong>. El usuario reconoce que iParts no comercializa repuestos de forma directa; por lo tanto, la disponibilidad, precios y condiciones de venta deben ser confirmadas directamente con el comercio a través de los canales de contacto provistos.</p>
+    <header class="hero" style="position: relative; background: #1a1a1a; overflow: hidden;">
+        <div class="hero-bg" style="z-index: 1;"></div>
+        
+        <div class="hero-content reveal" style="position: relative; z-index: 5;">
+            <h1>Encuentra tus repuestos en minutos</h1>
+            <p>Las tiendas más importantes de la ciudad en la palma de tu mano.</p>
+            <div style="display: flex; align-items: center; gap: 12px; margin-top: 20px; flex-wrap: wrap;">
+                <a href="https://wa.me/584127330382?text=Hola,%20quiero%20afiliar%20mi%20tienda%20a%20iParts." class="nav-btn" 
+                   style="padding: 0 24px; font-size: 0.95rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; height: 42px; border-radius: 25px; margin: 0; background-color: #FFD700; color: black; font-weight: bold;">
+                    Afiliar mi tienda
+                </a>
+            
+                <a href="https://play.google.com/store/apps/details?id=com.diegoor12.iparts" target="_blank" 
+                   style="display: inline-flex; align-items: center; height: 42px; overflow: hidden;">
+                    <img alt="Disponible en Google Play" 
+                         src="https://play.google.com/intl/en_us/badges/static/images/badges/es-419_badge_web_generic.png" 
+                         style="height: 60px; width: auto; margin: 0 -8px;"/>
+                </a>
+            </div>
+        </div>
+    
+        <div class="hero-mockup reveal delay-1" style="position: relative; z-index: 10; isolation: isolate;">
+            <div style="width: 280px; height: 580px; 
+                        background: #000; /* Fondo negro sólido base */
+                        border: 10px solid #2a2a2a; 
+                        border-radius: 35px; 
+                        box-shadow: 0 30px 60px rgba(0,0,0,0.6); 
+                        overflow: hidden; 
+                        transform: rotate(-5deg); 
+                        backface-visibility: hidden; 
+                        will-change: transform;">
+                
+                <img src="assets/app_mapa.webp" alt="Mapa iParts" 
+                     style="width: 100%; 
+                            height: 100%; 
+                            object-fit: cover; 
+                            display: block; 
+                            position: relative;
+                            z-index: 2;
+                            opacity: 1 !important; /* Forzamos opacidad total */
+                            image-rendering: high-quality;">
+                
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 1;"></div>
+            </div>
+        </div>
+    </header>
+    <style>
+        /* Animación del carrusel infinito */
+        .slider {
+            display: flex;
+            /* Ajustamos el ancho: 13 logos únicos x 2 (para el bucle) = 26 espacios */
+            width: calc(250px * 26); 
+            animation: scroll 45s linear infinite;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-250px * 13)); }
+        }
+        .slider:hover { animation-play-state: paused; }
+        .slide img { cursor: pointer; width: 150px; margin: 0 50px; transition: transform 0.3s; }
+        .slide img:hover { transform: scale(1.1); }
+    </style>
+    
+    <section class="aliados-section">
+        <p style="text-align:center; color:#888; font-size:0.8rem; text-transform:uppercase; letter-spacing:2px; margin-bottom:30px;">Tiendas Aliadas</p>
+        <div class="slider-container" style="overflow:hidden; padding: 20px 0;">
+            <div class="slider">
+                
+                <div class="slide"><img src="assets/assets logos/logo2.png" onclick="mostrarFomo('Embragues LUK')"></div>
+                <div class="slide"><img src="assets/assets logos/logo3.png" onclick="mostrarFomo('Emprendimiento Carlos Fuenmayor')"></div>
+                <div class="slide"><img src="assets/assets logos/logo4.png" onclick="mostrarFomo('Filtros y Lubricantes El Puente')"></div>
+                <div class="slide"><img src="assets/assets logos/logo5.png" onclick="mostrarFomo('Grúas RM2')"></div>
+                <div class="slide"><img src="assets/assets logos/logo6.png" onclick="mostrarFomo('Electro Auto Los Olivos')"></div>
+                <div class="slide"><img src="assets/assets logos/logo7.png" onclick="mostrarFomo('Multiservicios Vehimax')"></div>
+                <div class="slide"><img src="assets/assets logos/logo8.png" onclick="mostrarFomo('Repreca (Suplinca)')"></div>
+                <div class="slide"><img src="assets/assets logos/logo9.png" onclick="mostrarFomo('Repuestos RZ')"></div>
+                <div class="slide"><img src="assets/assets logos/logo10.png" onclick="mostrarFomo('Repuestos y Accesorios Santa Clara')"></div>
+                <div class="slide"><img src="assets/assets logos/logo11.png" onclick="mostrarFomo('Taller J&C')"></div>
+                <div class="slide"><img src="assets/assets logos/logo12.png" onclick="mostrarFomo('Tresna')"></div>
+                <div class="slide"><img src="assets/assets logos/logo13.png" onclick="mostrarFomo('Asia Motors')"></div>
+                <div class="slide"><img src="assets/assets logos/logo14.png" onclick="mostrarFomo('Inversiones GILCAR C.A')"></div>
 
-    <h2>2. Transacciones y Responsabilidad</h2>
-    <p>Cualquier acuerdo comercial o transacción económica ocurre <strong>fuera de la aplicación</strong> y es responsabilidad única y exclusiva del usuario y el establecimiento. iParts no garantiza la calidad, garantía o procedencia de los productos adquiridos en los comercios listados en el mapa.</p>
+                <div class="slide"><img src="assets/assets logos/logo1.png" onclick="mostrarFomo('Moto Repuestos El Primo')"></div>
+                <div class="slide"><img src="assets/assets logos/logo2.png" onclick="mostrarFomo('Embragues LUK')"></div>
+                <div class="slide"><img src="assets/assets logos/logo3.png" onclick="mostrarFomo('Emprendimiento Carlos Fuenmayor')"></div>
+                <div class="slide"><img src="assets/assets logos/logo4.png" onclick="mostrarFomo('Filtros y Lubricantes El Puente')"></div>
+                <div class="slide"><img src="assets/assets logos/logo5.png" onclick="mostrarFomo('Grúas RM2')"></div>
+                <div class="slide"><img src="assets/assets logos/logo6.png" onclick="mostrarFomo('Electro Auto Los Olivos')"></div>
+                <div class="slide"><img src="assets/assets logos/logo7.png" onclick="mostrarFomo('Multiservicios Vehimax')"></div>
+                <div class="slide"><img src="assets/assets logos/logo8.png" onclick="mostrarFomo('Repreca (Suplinca)')"></div>
+                <div class="slide"><img src="assets/assets logos/logo9.png" onclick="mostrarFomo('Repuestos RZ')"></div>
+                <div class="slide"><img src="assets/assets logos/logo10.png" onclick="mostrarFomo('Repuestos y Accesorios Santa Clara')"></div>
+                <div class="slide"><img src="assets/assets logos/logo11.png" onclick="mostrarFomo('Taller J&C')"></div>
+                <div class="slide"><img src="assets/assets logos/logo12.png" onclick="mostrarFomo('Tresna')"></div>
+                <div class="slide"><img src="assets/assets logos/logo13.png" onclick="mostrarFomo('Asia Motors')"></div>
+                <div class="slide"><img src="assets/assets logos/logo14.png" onclick="mostrarFomo('Inversiones GILCAR C.A')"></div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        function mostrarFomo(tienda) {
+            alert(`¿Buscas repuestos en ${tienda}? \n\nEsta tienda tiene ofertas exclusivas solo para usuarios de la APP iParts. ¡Descárgala ahora!`);
+        }
+    </script>
 
-    <h2>3. Uso de la Plataforma y Seguridad</h2>
-    <p>La administración de iParts se reserva el derecho de suspender el acceso a usuarios que utilicen los canales de contacto para fines distintos a la consulta de repuestos. Queda estrictamente prohibido el uso de lenguaje ofensivo, acoso o envío de contenido no solicitado (spam) hacia los establecimientos.</p>
+    <section style="padding: 80px 10%; background: #ffffff;">
+        <div class="reveal" style="text-align: center; margin-bottom: 50px;">
+            <h2 style="color: #002d55; font-size: 2.5rem; font-weight: 800;">¿Por qué iParts?</h2>
+            <p style="color: #666; max-width: 700px; margin: 0 auto; font-size: 1.1rem;">Optimizamos el mercado de repuestos eliminando las ineficiencias que te hacen perder tiempo y dinero.</p>
+        </div>
+    
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+            <div class="reveal" style="background: #f8f9fa; padding: 40px; border-radius: 20px; border-left: 5px solid #FFD700;">
+                <i class="fas fa-gas-pump" style="font-size: 2rem; color: #002d55; margin-bottom: 20px;"></i>
+                <h3 style="color: #002d55;">Adiós al gasto de gasolina</h3>
+                <p style="color: #555; line-height: 1.6;">No más vueltas al azar. Visualizas las opciones cerca de ti y solo enciendes el motor con certeza del stock.</p>
+            </div>
+            <div class="reveal delay-1" style="background: #f8f9fa; padding: 40px; border-radius: 20px; border-left: 5px solid #002d55;">
+                <i class="fas fa-clock" style="font-size: 2rem; color: #002d55; margin-bottom: 20px;"></i>
+                <h3 style="color: #002d55;">De horas a minutos</h3>
+                <p style="color: #555; line-height: 1.6;">Maquinaria parada es dinero perdido. iParts centraliza la oferta para encontrar componentes en tiempo récord.</p>
+            </div>
+            <div class="reveal delay-2" style="background: #f8f9fa; padding: 40px; border-radius: 20px; border-left: 5px solid #FFD700;">
+                <i class="fas fa-store" style="font-size: 2rem; color: #002d55; margin-bottom: 20px;"></i>
+                <h3 style="color: #002d55;">Inventario Centralizado</h3>
+                <p style="color: #555; line-height: 1.6;">Conectamos directamente al dueño del equipo con tiendas locales, facilitando cotizaciones inmediatas.</p>
+            </div>
+        </div>
+    </section>
 
-    <h2>4. Verificación y Datos de Usuario (KYC)</h2>
-    <p>Para velar por la integridad de la comunidad, iParts recolecta datos básicos (nombre, correo electrónico y número telefónico) con fines estrictos de verificación. El acceso a la <strong>ubicación GPS</strong> es un requisito indispensable para la funcionalidad del mapa y la precisión de las distancias mostradas.</p>
+    <section id="experiencia" style="padding: 100px 6%; background: #fdfdfd; text-align: center;">
+        <div class="reveal" style="margin-bottom: 60px;">
+            <h2 style="color: #002d55; font-size: 2.5rem; font-weight: 800; margin-bottom: 15px;">Explora la Experiencia iParts</h2>
+            <p style="color: #666; max-width: 750px; margin: 0 auto; font-size: 1.15rem;">Interfaz intuitiva diseñada para que tu búsqueda sea tan eficiente como tu maquinaria.</p>
+        </div>
+    
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 45px;">
+            <div class="reveal">
+                <div style="border: 10px solid #222; border-radius: 40px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.12); margin-bottom: 25px; max-width: 290px;">
+                    <img src="assets/captura_mapa_galeria.jpg" style="width: 100%; display: block;">
+                </div>
+                <h4 style="color: #002d55;">📍 Radar de Tiendas</h4>
+            </div>
+            <div class="reveal delay-1">
+                <div style="border: 10px solid #222; border-radius: 40px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.12); margin-bottom: 25px; max-width: 290px;">
+                    <img src="assets/captura_perfil.jpg" style="width: 100%; display: block;">
+                </div>
+                <h4 style="color: #002d55;">🏢 Perfil Profesional</h4>
+            </div>
+            <div class="reveal delay-2">
+                <div style="border: 10px solid #222; border-radius: 40px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.12); margin-bottom: 25px; max-width: 290px;">
+                    <img src="assets/captura_buscador.jpg" style="width: 100%; display: block;">
+                </div>
+                <h4 style="color: #002d55;">🔍 Filtros Rápidos</h4>
+            </div>
+        </div>
+    </section>
 
-    <h2>5. Planes de Suscripción para Comercios</h2>
-    <p>La inclusión y visibilidad de un comercio dentro de la plataforma iParts conlleva un costo de lanzamiento de <strong>$5 USD en plan Piloto</strong>. iParts se reserva el derecho de modificar los esquemas de beneficios y costos en futuras versiones, notificando debidamente a los comercios activos.</p>
+<section id="planes" style="padding: 80px 10%; background: #f4f7f9; text-align: center;">
+        <div class="reveal">
+            <h2 style="color: #002d55; font-size: 2.2rem; font-weight: 800; margin-bottom: 10px;">Haz crecer tu negocio con iParts</h2>
+            <p style="color: #666; margin-bottom: 50px;">Potencia la visibilidad de tu stock y conecta con clientes de alto valor.</p>
+        </div>
+    
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+            <div class="reveal" style="background: white; padding: 40px; border-radius: 20px; width: 260px; border-top: 5px solid #bdc3c7; display: flex; flex-direction: column;">
+                <h3 style="color: #666;">Básico</h3>
+                <div style="font-size: 2.2rem; font-weight: 900; margin: 15px 0; color: #002d55;">$0</div>
+                <ul style="text-align: left; font-size: 0.85rem; list-style: none; padding: 0; flex-grow: 1; line-height: 2;">
+                    <li>📍 Visibilidad en el Mapa</li>
+                    <li>🛠️ Perfil Comercial</li>
+                    <li>⭐ Sistema de Reseñas</li>
+                    <li>📲 WhatsApp Directo</li>
+                </ul>
+                <a href="https://wa.me/584127330382" class="nav-btn">EMPEZAR GRATIS</a>
+            </div>
 
-    <h2>6. Propiedad Intelectual y Jurisdicción</h2>
-    <p>El nombre "iParts", logotipos y código fuente son propiedad exclusiva de sus desarrolladores. Estos términos se rigen por la legislación vigente de la <strong>República Bolivariana de Venezuela</strong>, bajo la jurisdicción de los tribunales competentes en la ciudad de Maracaibo.</p>
+            <div class="reveal delay-1" style="background: white; padding: 40px; border-radius: 20px; width: 260px; border-top: 5px solid #002d55; display: flex; flex-direction: column;">
+                <h3 style="color: #002d55;">SILVER</h3>
+                <div style="font-size: 2.2rem; font-weight: 900; margin: 15px 0; color: #002d55;">$14.99</div>
+                <div style="font-size: 0.9rem; font-weight: bold; margin-bottom: 15px;">IDEAL PARA VENTAS</div>
+                <ul style="text-align: left; font-size: 0.85rem; list-style: none; padding: 0; flex-grow: 1; line-height: 2;">
+                    <li>✅ Todo lo del plan Básico</li>
+                    <li>📸 Vitrina de Ofertas Diarias</li>
+                    <li>🌟 Pin destacado</li>
+                    <li>🎧 Soporte Directo</li>
+                </ul>
+                <a href="https://wa.me/584127330382" class="nav-btn">SOLICITAR INFO</a>
+            </div>
 
-    <div class="footer">
-        <p>iParts APP - Maracaibo, Venezuela.</p>
-        <p>Contacto oficial: soporte@infoiparts.lat</p>
+            <div class="reveal delay-2" style="background: white; padding: 40px; border-radius: 20px; width: 260px; border: 2px solid #FFD700; transform: scale(1.05); z-index: 1; position: relative; display: flex; flex-direction: column;">
+                <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #002d55; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.7rem; font-weight: bold;">MÁS POPULAR</div>
+                <h3 style="color: #b8860b;">GOLD</h3>
+                <div style="font-size: 2.2rem; font-weight: 900; margin: 15px 0; color: #002d55;">$19.99</div>
+                <div style="font-size: 0.9rem; font-weight: bold; margin-bottom: 15px;">MÁXIMO PODER</div>
+                <ul style="text-align: left; font-size: 0.85rem; list-style: none; padding: 0; flex-grow: 1; line-height: 2;">
+                    <li>✅ Todo lo de planes anteriores</li>
+                    <li>🔔 Recibe pedidos específicos</li>
+                    <li>💎 Perfil Premium</li>
+                    <li>📊 Métricas de mercado</li>
+                </ul>
+                <a href="https://wa.me/584127330382" class="nav-btn" style="background:#002d55; color:white;">CONSULTAR CUPO</a>
+            </div>
+
+            <div class="reveal delay-3" style="background: white; padding: 40px; border-radius: 20px; width: 260px; border-top: 5px solid #002d55; display: flex; flex-direction: column; opacity: 0.9;">
+                <h3 style="color: #002d55;">PLATINUM</h3>
+                <div style="font-size: 2.2rem; font-weight: 900; margin: 15px 0; color: #002d55;">$49.99</div>
+                <div style="font-size: 0.9rem; font-weight: bold; margin-bottom: 15px;">EXCLUSIVIDAD</div>
+                <ul style="text-align: left; font-size: 0.85rem; list-style: none; padding: 0; flex-grow: 1; line-height: 2;">
+                    <li>✅ Todo lo de planes anteriores</li>
+                    <li>👑 Soporte VIP Personalizado</li>
+                </ul>
+                <a href="https://wa.me/584127330382" class="nav-btn">CONTACTAR</a>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: #002d55; color: white; padding: 80px 6% 40px; text-align: center;">
+        <div class="reveal" style="margin-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 60px;">
+            <h2 style="font-size: 2.5rem; color: #FFD700;">¿Listo para optimizar tu búsqueda?</h2>
+            <p style="margin-bottom: 30px; opacity: 0.9;">Únete a la red de repuestos más inteligente de la ciudad.</p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 20px;">
+                <a href="https://wa.me/584127330382?text=Hola,%20quiero%20afiliar%20mi%20tienda%20a%20iParts." class="nav-btn" style="padding: 0 28px; font-size: 1rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; height: 46px; border-radius: 25px; background-color: #FFD700; color: #002d55; font-weight: bold;">
+                    Afiliar mi Tienda
+                </a>
+            
+                <a href="https://play.google.com/store/apps/details?id=com.diegoor12.iparts" target="_blank" style="display: inline-flex; align-items: center; height: 46px; overflow: hidden;">
+                    <img alt="Disponible en Google Play" 
+                         src="https://play.google.com/intl/en_us/badges/static/images/badges/es-419_badge_web_generic.png" 
+                         style="height: 68px; width: auto; margin: 0 -10px;"/>
+                </a>
+            </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-around; gap: 40px; text-align: left;">
+            <div>
+                <h3 style="color: #FFD700;">iParts</h3>
+                <p style="max-width: 250px; opacity: 0.7;">Tecnología de geolocalización para la industria de repuestos.</p>
+            </div>
+            <div>
+                <h4>Soporte</h4>
+                <p>📧 soporte@infoiparts.lat</p>
+                <p>📲 +58 412-7330382</p>
+            </div>
+        </div>
+        <p style="margin-top: 60px; opacity: 0.5;">© 2026 iParts. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        const observerOptions = {
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
+
+<div id="notification-toast" style="position: fixed; bottom: 20px; left: 20px; background: white; padding: 15px 20px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 15px; z-index: 9999; transform: translateY(150%); transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); border-left: 5px solid #FFD700; max-width: 320px; pointer-events: none;">
+    <div id="notif-icon-bg" style="background: #002d55; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <i class="fas fa-store" id="notif-icon" style="font-size: 0.9rem;"></i>
     </div>
+    <div>
+        <p id="notif-text" style="margin: 0; font-size: 0.85rem; color: #333; line-height: 1.4;"></p>
+        <span id="notif-time" style="font-size: 0.7rem; color: #888; font-weight: 500;"></span>
+    </div>
+</div>
 
+<script>
+    const tiendas = [
+        "Filtros y Lubricantes El Puente",
+        "Répreca (Suplinca)",
+        "Moto Repuestos El Primo",
+        "Multiservicios Vehimax",
+        "Carlos Fuenmayor Repuestos Diesel",
+        "Taller J&C Especialistas en Chrysler",
+        "Tresna C.A",
+        "Repuestos RZ",
+        "Asia Motors",
+        "Embragues Luk",
+        "Electro Auto Los Olivos",
+        "Gruas RM2",
+        "Repuestos y accesorios Santa Clara",
+        "Inversiones GILCAR C.A"
+    ];
+
+    const variantes = [
+        { msg: "se acaba de afiliar a iParts.", label: "¡NUEVO!", icon: "fa-store-alt", color: "#FFD700" },
+        { msg: "ya es una Tienda Verificada.", label: "VERIFICADO", icon: "fa-check-circle", color: "#00c853" },
+        { msg: "actualizó su inventario.", label: "HACE 2 MIN", icon: "fa-sync-alt", color: "#002d55" },
+        { msg: "activó ofertas especiales.", label: "PROMO", icon: "fa-tag", color: "#d50000" }
+    ];
+
+    const toast = document.getElementById('notification-toast');
+    const text = document.getElementById('notif-text');
+    const timeLabel = document.getElementById('notif-time');
+    const icon = document.getElementById('notif-icon');
+    const iconBg = document.getElementById('notif-icon-bg');
+
+    function showNotification() {
+        const tienda = tiendas[Math.floor(Math.random() * tiendas.length)];
+        const variante = variantes[Math.floor(Math.random() * variantes.length)];
+        
+        // Inyectar datos
+        text.innerHTML = `<strong>${tienda}</strong> ${variante.msg}`;
+        timeLabel.innerText = variante.label;
+        toast.style.borderLeftColor = variante.color;
+        icon.className = `fas ${variante.icon}`;
+        
+        // Mostrar
+        toast.style.transform = "translateY(0)";
+        
+        // Ocultar después de 5.5 segundos
+        setTimeout(() => {
+            toast.style.transform = "translateY(150%)";
+        }, 5500);
+    }
+
+    // Sistema de tiempos aleatorios para que parezca humano
+    function triggerRandomly() {
+        // Entre 10 y 18 segundos para la próxima notificación
+        const randomDelay = Math.floor(Math.random() * (18000 - 10000) + 10000);
+        
+        setTimeout(() => {
+            showNotification();
+            triggerRandomly();
+        }, randomDelay);
+    }
+
+    // Primera aparición a los 4 segundos de carga
+    setTimeout(triggerRandomly, 4000);
+</script>
 </body>
 </html>
