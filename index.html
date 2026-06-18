@@ -3,44 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iParts V2 | Ubica tu Repuesto en Maracaibo</title>
+    <title>iParts | Ubica tu Repuesto en Maracaibo</title>
     <link rel="icon" type="image/png" href="assets/icon.png?v=2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- VARIABLES DE DISEÑO: CYBER-MECÁNICO --- */
         :root {
             --azul-iparts: #002d55;
-            --azul-neon: #005bb5;
             --dorado-gold: #FFD700;
-            --dorado-oscuro: #b89b00;
-            --asfalto-oscuro: #121212;
-            --metal-placa: #1e2126;
-            --acero-gris: #2c303a;
-            --texto-claro: #e0e6ed;
-            --texto-muted: #8b9bb4;
+            --blanco: #ffffff;
+            --fondo-oscuro: #121212;
+            --tarjeta-metal: #1e1e1e;
+            --borde-industrial: #333333;
+            --texto-claro: #e0e0e0;
+            --texto-gris: #a0a0a0;
         }
 
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
             margin: 0;
-            background-color: var(--asfalto-oscuro);
+            background-color: var(--fondo-oscuro);
             color: var(--texto-claro);
-            overflow-x: hidden;
-        }
-
-        /* --- FONDOS TECNOLÓGICOS (Patrones CSS) --- */
-        .bg-tech-grid {
-            background-color: var(--asfalto-oscuro);
-            background-image: 
-                linear-gradient(rgba(0, 45, 85, 0.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 45, 85, 0.3) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
-
-        .bg-metal-brush {
-            background: linear-gradient(145deg, var(--metal-placa) 0%, var(--asfalto-oscuro) 100%);
-            border-top: 1px solid var(--acero-gris);
-            border-bottom: 1px solid var(--acero-gris);
+            overflow-x: hidden; 
         }
 
         /* --- SISTEMA DE ANIMACIÓN --- */
@@ -59,16 +42,17 @@
         .delay-1 { transition-delay: 0.2s; }
         .delay-2 { transition-delay: 0.4s; }
         .delay-3 { transition-delay: 0.6s; }
+        .delay-4 { transition-delay: 0.8s; }
 
-        /* 1. NAVBAR (Cristal Oscuro) */
+        /* 1. NAVBAR */
         .navbar {
             padding: 12px 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(18, 18, 18, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid var(--azul-iparts);
+            background: #0a0a0a;
+            border-bottom: 2px solid var(--borde-industrial);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -82,37 +66,34 @@
         }
 
         .brand-logo {
-            width: 50px;
+            width: 55px;
             height: auto;
-            filter: drop-shadow(0 0 5px var(--azul-neon));
+            transition: transform 0.3s ease;
         }
 
         .brand-name {
-            color: var(--texto-claro);
+            color: var(--blanco);
             font-size: 1.6rem;
-            font-weight: 900;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
         .nav-btn {
             background: var(--dorado-gold);
-            color: var(--asfalto-oscuro);
-            padding: 10px 24px;
-            border-radius: 4px; /* Rústico: bordes más cuadrados */
+            color: black;
+            padding: 10px 22px;
+            border-radius: 4px; 
             text-decoration: none;
-            font-weight: 900;
+            font-weight: 800;
             font-size: 0.9rem;
-            text-transform: uppercase;
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
-            border: 1px solid var(--dorado-oscuro);
+            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.15);
+            text-transform: uppercase;
         }
 
         .nav-btn:hover { 
-            background: #ffe033; 
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+            background: #e6c200; 
+            transform: translateY(-2px); 
         }
 
         /* 2. HERO SECTION */
@@ -123,70 +104,30 @@
             align-items: center;
             justify-content: space-between;
             gap: 40px;
-            min-height: 80vh;
+            overflow: hidden;
+            background: #0d0d0d;
+            color: white;
+            border-bottom: 1px solid var(--borde-industrial);
         }
 
-        .hero-bg-overlay {
+        .hero-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 70% 50%, rgba(0, 45, 85, 0.4) 0%, var(--asfalto-oscuro) 70%);
+            background: linear-gradient(rgba(0, 45, 85, 0.8), rgba(18, 18, 18, 0.9)), url('assets/hero.webp') no-repeat center center;
+            background-size: cover;
             z-index: 1;
         }
 
-        .hero-content { 
-            position: relative; 
-            z-index: 2; 
-            flex: 1; 
-            max-width: 650px; 
-        }
+        .hero-content { position: relative; z-index: 2; flex: 1; text-align: left; max-width: 600px; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; font-weight: 900; line-height: 1.1; letter-spacing: -1px; }
+        .hero p { font-size: 1.3rem; color: var(--texto-gris); margin-bottom: 30px; }
 
-        .hero h1 { 
-            font-size: 3.8rem; 
-            margin-bottom: 20px; 
-            font-weight: 900; 
-            line-height: 1.1; 
-            text-transform: uppercase;
-            text-shadow: 2px 2px 0px var(--azul-iparts);
-        }
-
-        .hero h1 span {
-            color: var(--dorado-gold);
-        }
-
-        .hero p { 
-            font-size: 1.3rem; 
-            color: var(--texto-muted); 
-            margin-bottom: 30px; 
-            border-left: 4px solid var(--azul-neon);
-            padding-left: 15px;
-        }
-
-        /* Teléfono Hero */
-        .hero-mockup-container {
-            width: 300px; 
-            height: 620px; 
-            background: #000;
-            border: 8px solid var(--acero-gris); 
-            border-radius: 30px; 
-            box-shadow: 
-                0 0 40px rgba(0, 45, 85, 0.8),
-                inset 0 0 10px rgba(255,255,255,0.2); 
-            overflow: hidden; 
-            transform: rotate(-5deg) perspective(1000px) rotateY(-15deg); 
-            transition: transform 0.5s ease;
-        }
-
-        .hero-mockup-container:hover {
-            transform: rotate(0deg) perspective(1000px) rotateY(0deg);
-        }
-
-        /* 3. CARRUSEL INFINITO (Cinta Transportadora) */
+        /* 3. CARRUSEL INFINITO */
         .aliados-section {
             padding: 40px 0;
-            background: #0a0a0a;
-            border-top: 4px solid var(--dorado-gold);
-            border-bottom: 4px solid var(--dorado-gold);
-            position: relative;
+            background: #050505; 
+            overflow: hidden;
+            border-bottom: 2px solid var(--borde-industrial);
         }
 
         .slider {
@@ -194,127 +135,143 @@
             width: calc(250px * 26); 
             animation: scroll 45s linear infinite;
         }
+        
+        .slider:hover { animation-play-state: paused; }
 
         .slide {
             width: 180px;
-            height: 90px;
+            height: 110px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--metal-placa);
-            border: 1px solid var(--acero-gris);
-            border-radius: 8px;
+            background: var(--blanco); 
+            border-radius: 8px; 
             margin: 0 15px;
-            padding: 15px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-            transition: all 0.3s ease;
-        }
-
-        .slide:hover {
-            border-color: var(--dorado-gold);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border: 2px solid var(--borde-industrial);
         }
 
         .slide img { 
             max-width: 100%; 
             max-height: 100%; 
             object-fit: contain; 
-            filter: grayscale(100%) brightness(1.5);
-            transition: filter 0.3s;
             cursor: pointer;
+            transition: transform 0.3s;
         }
 
-        .slide:hover img {
-            filter: grayscale(0%) brightness(1);
-        }
+        .slide img:hover { transform: scale(1.08); }
 
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-250px * 13)); }
-        }
-
-        /* TARJETAS RÚSTICAS (Por qué iParts) */
-        .tech-card {
-            background: var(--metal-placa);
-            padding: 40px;
-            border-radius: 8px;
-            border: 1px solid var(--acero-gris);
+        /* --- GALERÍA 3D INTERACTIVA --- */
+        .gallery-wrapper {
             position: relative;
+            width: 100%;
+            height: 550px; /* Altura ajustada */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1200px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-top: 20px;
+            touch-action: pan-y; /* Permite scroll vertical pero detecta swipe horizontal */
         }
 
-        .tech-card::before {
-            content: '';
+        .gallery-item {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 4px;
-            background: var(--dorado-gold);
+            width: 250px;
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            cursor: pointer;
+            will-change: transform, opacity;
         }
 
-        .tech-card.blue-accent::before {
-            background: var(--azul-neon);
-        }
-
-        .tech-card h3 {
-            color: var(--texto-claro);
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        /* GALERÍA DE MOCKUPS */
-        .mockup-gallery-item {
-            border: 6px solid var(--acero-gris); 
-            border-radius: 20px; 
-            overflow: hidden; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6); 
-            margin-bottom: 25px; 
-            max-width: 280px;
+        .gallery-item img {
+            width: 100%;
+            max-height: 520px;
+            object-fit: cover;
+            display: block;
+            border: 6px solid var(--borde-industrial);
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
             background: #000;
-            position: relative;
         }
 
-        .mockup-gallery-item::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            box-shadow: inset 0 0 20px rgba(0, 45, 85, 0.5);
-            pointer-events: none;
+        /* Título Dinámico Fuera del 3D para que sea SIEMPRE visible */
+        .dynamic-gallery-title {
+            text-align: center;
+            color: var(--dorado-gold);
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin: 20px 0 15px 0;
+            min-height: 35px; /* Evita que brinque la pantalla al cambiar */
+            transition: opacity 0.3s ease;
+        }
+
+        /* Controles de la galería */
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 20;
+        }
+
+        .gal-btn {
+            background: var(--tarjeta-metal);
+            color: var(--texto-claro);
+            border: 1px solid var(--borde-industrial);
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .gal-btn:hover {
+            background: var(--borde-industrial);
+            color: var(--dorado-gold);
+            border-color: var(--dorado-gold);
         }
 
         @media (max-width: 968px) {
             .hero { flex-direction: column; text-align: center; padding: 80px 20px; }
-            .hero-content { max-width: 100%; }
+            .hero-content { text-align: center; max-width: 100%; }
+            .hero-mockup { justify-content: center; }
             .hero h1 { font-size: 2.5rem; }
-            .hero p { border-left: none; padding-left: 0; }
-            .hero-mockup-container { transform: none; }
+            
+            /* Ajustes para móviles de la galería 3D */
+            .gallery-wrapper { height: 450px; }
+            .gallery-item { width: 200px; }
+            .dynamic-gallery-title { font-size: 1.2rem; }
         }
     </style>
 </head>
-<body class="bg-tech-grid">
+<body>
 
-    <!-- NAVBAR -->
     <nav class="navbar">
         <a href="#" class="brand-container">
             <img src="assets/icon.png" alt="iParts Logo" class="brand-logo">
             <span class="brand-name">iParts</span>
         </a>
-        <a href="https://wa.me/584127330382?text=Hola,%20quiero%20afiliar%20mi%20tienda%20a%20iParts." class="nav-btn">Afiliar Taller / Tienda</a>
+        <a href="https://wa.me/584127330382?text=Hola,%20quiero%20afiliar%20mi%20tienda%20a%20iParts." class="nav-btn">Afiliar mi tienda</a>
     </nav>
 
-    <!-- HERO SECTION -->
     <header class="hero">
-        <div class="hero-bg-overlay"></div>
+        <div class="hero-bg"></div>
         
         <div class="hero-content reveal">
-            <h1>Encuentra repuestos en <span>Tiempo Real</span></h1>
-            <p>Radar satelital activado. Las tiendas y ventas de repuestos más fuertes de la ciudad conectadas a tu maquinaria.</p>
-            
-            <div style="display: flex; align-items: center; gap: 15px; margin-top: 30px; flex-wrap: wrap; position: relative; z-index: 10;">
-                <a href="https://wa.me/584127330382?text=Hola,%20quiero%20afiliar%20mi%20tienda%20a%20iParts." class="nav-btn">
-                    <i class="fas fa-plug" style="margin-right: 8px;"></i> Conectar mi Inventario
+            <h1>Encuentra tus repuestos en minutos</h1>
+            <p>Las tiendas más importantes de la ciudad en la palma de tu mano.</p>
+            <div style="display: flex; align-items: center; gap: 12px; margin-top: 20px; flex-wrap: wrap;">
+                <a href="https://wa.me/584127330382?text=Hola,%20quiero%20afiliar%20mi%20tienda%20a%20iParts." class="nav-btn" 
+                   style="padding: 0 24px; display: inline-flex; align-items: center; justify-content: center; height: 46px; margin: 0;">
+                    Afiliar mi tienda
                 </a>
             
-                <a href="https://play.google.com/store/apps/details?id=com.diegoor12.iparts" target="_blank" style="display: inline-flex; height: 46px; border-radius: 4px; overflow: hidden; border: 1px solid var(--acero-gris); background: black;">
+                <a href="https://play.google.com/store/apps/details?id=com.diegoor12.iparts" target="_blank" 
+                   style="display: inline-flex; align-items: center; height: 46px; overflow: hidden; border-radius: 4px; border: 1px solid var(--borde-industrial); background: #000;">
                     <img alt="Disponible en Google Play" 
                          src="https://play.google.com/intl/en_us/badges/static/images/badges/es-419_badge_web_generic.png" 
                          style="height: 65px; width: auto; margin: -9px;"/>
@@ -322,23 +279,27 @@
             </div>
         </div>
     
-        <div class="reveal delay-1" style="position: relative; z-index: 10;">
-            <!-- AQUÍ VA LA IMAGEN V2 DEL MAPA -->
-            <div class="hero-mockup-container">
-                <img src="assets/v2_app_mapa.webp" alt="Radar iParts v2" 
-                     onerror="this.src='assets/app_mapa.webp'" 
-                     style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        <div class="hero-mockup reveal delay-1" style="position: relative; z-index: 10; isolation: isolate;">
+            <div style="width: 280px; height: 580px; 
+                        background: #000; 
+                        border: 8px solid var(--borde-industrial); 
+                        border-radius: 30px; 
+                        box-shadow: 0 20px 50px rgba(0, 45, 85, 0.4); 
+                        overflow: hidden; 
+                        transform: rotate(-5deg); 
+                        backface-visibility: hidden; 
+                        will-change: transform;">
+                
+                <img src="assets/v2_app_mapa.webp" onerror="this.src='assets/app_mapa.png'" alt="Mapa iParts" 
+                     style="width: 100%; height: 100%; object-fit: cover; display: block; position: relative; z-index: 2; image-rendering: high-quality;">
             </div>
         </div>
     </header>
     
-    <!-- CARRUSEL INFINITO -->
     <section class="aliados-section">
-        <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); background: var(--dorado-gold); color: #000; padding: 2px 15px; font-size: 0.7rem; font-weight: 900; letter-spacing: 2px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; z-index: 2;">RED DE DISTRIBUIDORES CONECTADOS</div>
-        
-        <div class="slider-container" style="overflow:hidden; padding: 30px 0;">
+        <p style="text-align:center; color:var(--texto-gris); font-size:0.8rem; text-transform:uppercase; letter-spacing:2px; margin-bottom:30px; font-weight: 800;">Tiendas Aliadas</p>
+        <div class="slider-container" style="overflow:hidden; padding: 10px 0;">
             <div class="slider">
-                <!-- Se clonan los logos para el efecto infinito -->
                 <div class="slide"><img src="assets/assets logos/logo2.png" onclick="mostrarFomo('Embragues LUK')"></div>
                 <div class="slide"><img src="assets/assets logos/logo3.png" onclick="mostrarFomo('Emprendimiento Carlos Fuenmayor')"></div>
                 <div class="slide"><img src="assets/assets logos/logo4.png" onclick="mostrarFomo('Filtros y Lubricantes El Puente')"></div>
@@ -373,166 +334,292 @@
     
     <script>
         function mostrarFomo(tienda) {
-            alert(`SISTEMA IPARTS: \n\n${tienda} tiene inventario sincronizado. \nDescarga la APP para ver disponibilidad y precios exactos en tiempo real.`);
+            alert(`¿Buscas repuestos en ${tienda}? \n\nEsta tienda tiene ofertas exclusivas solo para usuarios de la APP iParts. ¡Descárgala ahora!`);
         }
     </script>
 
-    <!-- SECCIÓN CARACTERÍSTICAS -->
-    <section class="bg-metal-brush" style="padding: 100px 10%;">
-        <div class="reveal" style="text-align: center; margin-bottom: 60px;">
-            <h2 style="color: var(--texto-claro); font-size: 2.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">Ingeniería en tu Búsqueda</h2>
-            <p style="color: var(--texto-muted); max-width: 700px; margin: 0 auto; font-size: 1.1rem;">Optimizamos la cadena de suministro eliminando la fricción. Conecta directo con el bloque motor del mercado.</p>
+    <section style="padding: 80px 10%; background: #161616;">
+        <div class="reveal" style="text-align: center; margin-bottom: 50px;">
+            <h2 style="color: var(--blanco); font-size: 2.5rem; font-weight: 800;">¿Por qué iParts?</h2>
+            <p style="color: var(--texto-gris); max-width: 700px; margin: 0 auto; font-size: 1.1rem;">Optimizamos el mercado de repuestos eliminando las ineficiencias que te hacen perder tiempo y dinero.</p>
         </div>
     
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-            <div class="reveal tech-card">
-                <i class="fas fa-gas-pump" style="font-size: 2.5rem; color: var(--dorado-gold); margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(255,215,0,0.4));"></i>
-                <h3>Combustible Optimizado</h3>
-                <p style="color: var(--texto-muted); line-height: 1.6;">Cero recorridos a ciegas. El radar te indica coordenadas exactas de stock antes de encender el motor.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+            <div class="reveal" style="background: var(--tarjeta-metal); padding: 40px; border-radius: 8px; border-left: 5px solid var(--dorado-gold); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                <i class="fas fa-gas-pump" style="font-size: 2rem; color: var(--dorado-gold); margin-bottom: 20px;"></i>
+                <h3 style="color: var(--blanco);">Adiós al gasto de gasolina</h3>
+                <p style="color: var(--texto-gris); line-height: 1.6;">No más vueltas al azar. Visualizas las opciones cerca de ti y solo enciendes el motor con certeza del stock.</p>
             </div>
-            <div class="reveal delay-1 tech-card blue-accent">
-                <i class="fas fa-tachometer-alt" style="font-size: 2.5rem; color: var(--azul-neon); margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(0,91,181,0.6));"></i>
-                <h3>RPM al Máximo</h3>
-                <p style="color: var(--texto-muted); line-height: 1.6;">Maquinaria parada es dinero quemado. Cotizaciones simultáneas para reactivar operaciones en minutos.</p>
+            <div class="reveal delay-1" style="background: var(--tarjeta-metal); padding: 40px; border-radius: 8px; border-left: 5px solid var(--azul-iparts); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                <i class="fas fa-clock" style="font-size: 2rem; color: #4da6ff; margin-bottom: 20px;"></i>
+                <h3 style="color: var(--blanco);">De horas a minutos</h3>
+                <p style="color: var(--texto-gris); line-height: 1.6;">Maquinaria parada es dinero perdido. iParts centraliza la oferta para encontrar componentes en tiempo récord.</p>
             </div>
-            <div class="reveal delay-2 tech-card">
-                <i class="fas fa-database" style="font-size: 2.5rem; color: var(--dorado-gold); margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(255,215,0,0.4));"></i>
-                <h3>Stock Centralizado</h3>
-                <p style="color: var(--texto-muted); line-height: 1.6;">Acceso directo a la base de datos de los principales almacenes vehiculares y diésel de la región.</p>
+            <div class="reveal delay-2" style="background: var(--tarjeta-metal); padding: 40px; border-radius: 8px; border-left: 5px solid var(--dorado-gold); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                <i class="fas fa-store" style="font-size: 2rem; color: var(--dorado-gold); margin-bottom: 20px;"></i>
+                <h3 style="color: var(--blanco);">Inventario Centralizado</h3>
+                <p style="color: var(--texto-gris); line-height: 1.6;">Conectamos directamente al dueño del equipo con tiendas locales, facilitando cotizaciones inmediatas.</p>
             </div>
         </div>
     </section>
 
-    <!-- GALERÍA EXPERIENCIA V2 -->
-    <section id="experiencia" class="bg-tech-grid" style="padding: 100px 6%; text-align: center; border-bottom: 1px solid var(--acero-gris);">
-        <div class="reveal" style="margin-bottom: 60px;">
-            <h2 style="color: var(--dorado-gold); font-size: 2.5rem; font-weight: 900; margin-bottom: 15px; text-transform: uppercase;">Interfaz V2.0 Desplegada</h2>
-            <p style="color: var(--texto-muted); max-width: 750px; margin: 0 auto; font-size: 1.15rem;">Modo oscuro nativo, geolocalización de alta precisión y respuesta en milisegundos.</p>
+    <!-- GALERÍA DE MOCKUPS 3D INTERACTIVA + SWIPE -->
+    <section id="experiencia" style="padding: 100px 6%; background: var(--fondo-oscuro); text-align: center; border-top: 1px solid var(--borde-industrial); border-bottom: 1px solid var(--borde-industrial);">
+        <div class="reveal" style="margin-bottom: 20px;">
+            <h2 style="color: var(--blanco); font-size: 2.5rem; font-weight: 800; margin-bottom: 15px;">Explora la Experiencia iParts</h2>
+            <p style="color: var(--texto-gris); max-width: 750px; margin: 0 auto; font-size: 1.15rem;">Interfaz intuitiva diseñada para que tu búsqueda sea tan eficiente como tu maquinaria.</p>
         </div>
     
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;">
-            <div class="reveal">
-                <div class="mockup-gallery-item">
-                    <!-- AQUÍ VAN TUS IMÁGENES V2 -->
-                    <img src="assets/v2_captura_mapa.jpg" onerror="this.src='assets/captura_mapa_galeria.jpg'" style="width: 100%; display: block;">
+        <div class="reveal delay-1">
+            <div class="gallery-wrapper" id="galleryWrapper">
+                
+                <!-- Los títulos ahora se guardan en data-title para extraerlos -->
+                <div class="gallery-item" data-title="📍 Mapa inteligente">
+                    <img src="assets/v2_captura_mapa.jpg" onerror="this.src='assets/captura_mapa_galeria.jpg'">
                 </div>
-                <h4 style="color: var(--texto-claro); font-family: monospace; font-size: 1.1rem;"><i class="fas fa-crosshairs" style="color: var(--azul-neon);"></i> MODULO_RADAR.EXE</h4>
+
+                <div class="gallery-item" data-title="🏢 Perfil Profesional">
+                    <img src="assets/v2_captura_perfil.jpg" onerror="this.src='assets/captura_perfil.jpg'">
+                </div>
+
+                <div class="gallery-item" data-title="🔍 Busqueda Inteligente">
+                    <img src="assets/v2_captura_buscador.jpg" onerror="this.src='assets/captura_buscador.jpg'">
+                </div>
+
+                <div class="gallery-item" data-title="⚡ Ofertas diarias">
+                    <img src="assets/Home.png" onerror="this.src='assets/Home.jpg'">
+                </div>
+
+                <div class="gallery-item" data-title="📦 Gestiona tu tienda">
+                    <img src="assets/iparts_bussines.png" onerror="this.src='assets/iparts_bussines.jpg'">
+                </div>
+
             </div>
-            <div class="reveal delay-1">
-                <div class="mockup-gallery-item">
-                    <!-- AQUÍ VAN TUS IMÁGENES V2 -->
-                    <img src="assets/v2_captura_perfil.jpg" onerror="this.src='assets/captura_perfil.jpg'" style="width: 100%; display: block;">
-                </div>
-                <h4 style="color: var(--texto-claro); font-family: monospace; font-size: 1.1rem;"><i class="fas fa-id-badge" style="color: var(--dorado-gold);"></i> PERFIL_TIENDA.SYS</h4>
-            </div>
-            <div class="reveal delay-2">
-                <div class="mockup-gallery-item">
-                    <!-- AQUÍ VAN TUS IMÁGENES V2 -->
-                    <img src="assets/v2_captura_buscador.jpg" onerror="this.src='assets/captura_buscador.jpg'" style="width: 100%; display: block;">
-                </div>
-                <h4 style="color: var(--texto-claro); font-family: monospace; font-size: 1.1rem;"><i class="fas fa-search" style="color: var(--azul-neon);"></i> ALGORITMO_BUSQUEDA</h4>
+
+            <!-- TÍTULO DINÁMICO (Siempre visible) -->
+            <div id="dynamicTitle" class="dynamic-gallery-title">📍 Radar de Tiendas</div>
+
+            <!-- Botones de Navegación -->
+            <div class="gallery-controls">
+                <button class="gal-btn" onclick="prevGallery()">&#10094; Anterior</button>
+                <button class="gal-btn" onclick="nextGallery()">Siguiente &#10095;</button>
             </div>
         </div>
     </section>
 
-    <!-- PLANES DE NEGOCIO -->
-    <section id="planes" class="bg-metal-brush" style="padding: 100px 10%; text-align: center;">
+    <!-- SCRIPT DEL CARRUSEL 3D Y GESTOS TÁCTILES (SWIPE) -->
+    <script>
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const dynamicTitle = document.getElementById('dynamicTitle');
+        const galleryWrapper = document.getElementById('galleryWrapper');
+        let currentIndex = 2; // Empezamos en la imagen del medio
+
+        function updateGallery() {
+            const isMobile = window.innerWidth <= 768;
+            const xOffsetMultiplier = isMobile ? 120 : 180;
+
+            galleryItems.forEach((item, index) => {
+                let offset = index - currentIndex;
+
+                // Animación 3D
+                let x = offset * xOffsetMultiplier; 
+                let scale = 1 - Math.abs(offset) * 0.15; 
+                let z = -Math.abs(offset) * 150; 
+                let rotateY = offset * -25; 
+
+                // Si está muy lejos la ocultamos suavemente
+                let opacity = Math.abs(offset) > 2 ? 0 : (1 - Math.abs(offset) * 0.3);
+
+                item.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${rotateY}deg) scale(${scale})`;
+                item.style.zIndex = 10 - Math.abs(offset);
+                item.style.opacity = opacity;
+
+                if(offset === 0) {
+                    item.style.filter = "brightness(1)";
+                    // Actualizar el título dinámico con pequeño fade
+                    dynamicTitle.style.opacity = 0;
+                    setTimeout(() => {
+                        dynamicTitle.innerText = item.getAttribute('data-title');
+                        dynamicTitle.style.opacity = 1;
+                    }, 150);
+                } else {
+                    item.style.filter = "brightness(0.3)";
+                }
+            });
+        }
+
+        // Clics directos en las imágenes
+        galleryItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                currentIndex = index;
+                updateGallery();
+            });
+        });
+
+        function nextGallery() {
+            if(currentIndex < galleryItems.length - 1) {
+                currentIndex++;
+                updateGallery();
+            }
+        }
+
+        function prevGallery() {
+            if(currentIndex > 0) {
+                currentIndex--;
+                updateGallery();
+            }
+        }
+
+        // --- SISTEMA DE SWIPE (DESLIZAR EN CELULARES) ---
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        galleryWrapper.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        galleryWrapper.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, {passive: true});
+
+        function handleSwipe() {
+            const swipeThreshold = 50; // Distancia mínima para considerar que deslizó
+            if (touchStartX - touchEndX > swipeThreshold) {
+                nextGallery(); // Deslizó a la izquierda
+            } else if (touchEndX - touchStartX > swipeThreshold) {
+                prevGallery(); // Deslizó a la derecha
+            }
+        }
+
+        // Iniciar la galería
+        updateGallery();
+        window.addEventListener('resize', updateGallery);
+    </script>
+
+    <!-- PLANES CON PRECIOS TACHADOS Y ETIQUETA /mensual -->
+    <section id="planes" style="padding: 80px 10%; background: #161616; text-align: center;">
         <div class="reveal">
-            <h2 style="color: var(--texto-claro); font-size: 2.5rem; font-weight: 900; margin-bottom: 15px; text-transform: uppercase;">Actualiza el Software de tu Tienda</h2>
-            <p style="color: var(--texto-muted); margin-bottom: 60px;">Planes estructurados para maximizar el flujo de ventas de tu inventario físico.</p>
+            <h2 style="color: var(--blanco); font-size: 2.2rem; font-weight: 800; margin-bottom: 10px;">Haz crecer tu negocio con iParts</h2>
+            <p style="color: var(--texto-gris); margin-bottom: 50px;">Potencia la visibilidad de tu stock y conecta con clientes de alto valor.</p>
         </div>
     
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 25px;">
-            <!-- Plan Básico -->
-            <div class="reveal tech-card" style="width: 260px; display: flex; flex-direction: column; text-align: left; border-top: 4px solid var(--acero-gris);">
-                <h3 style="color: var(--texto-muted); font-family: monospace;">[BÁSICO]</h3>
-                <div style="font-size: 2.8rem; font-weight: 900; margin: 10px 0; color: var(--texto-claro);">$0</div>
-                <ul style="font-size: 0.9rem; color: var(--texto-muted); list-style: none; padding: 0; flex-grow: 1; line-height: 2.2;">
-                    <li><i class="fas fa-check" style="color: var(--acero-gris); margin-right: 8px;"></i> Radar Activo</li>
-                    <li><i class="fas fa-check" style="color: var(--acero-gris); margin-right: 8px;"></i> Perfil Estandar</li>
-                    <li><i class="fas fa-check" style="color: var(--acero-gris); margin-right: 8px;"></i> Rating Base</li>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+            <div class="reveal" style="background: var(--tarjeta-metal); padding: 40px; border-radius: 8px; width: 260px; border-top: 4px solid var(--borde-industrial); display: flex; flex-direction: column; box-shadow: 0 10px 20px rgba(0,0,0,0.4);">
+                <h3 style="color: var(--texto-gris);">Básico</h3>
+                <div style="margin: 15px 0;">
+                    <span style="text-decoration: line-through; color: var(--texto-gris); font-size: 1.2rem; margin-right: 8px;">$5</span>
+                    <span style="font-size: 2.5rem; font-weight: 900; color: var(--blanco);">$0</span>
+                    <span style="font-size: 1rem; color: var(--texto-gris); margin-left: 4px;">/mensual</span>
+                </div>
+                <ul style="text-align: left; font-size: 0.85rem; color: var(--texto-gris); list-style: none; padding: 0; flex-grow: 1; line-height: 2;">
+                    <li>📍 Visibilidad en el Mapa</li>
+                    <li>🛠️ Perfil Comercial</li>
                 </ul>
-                <a href="https://wa.me/584127330382" class="nav-btn" style="text-align: center; background: transparent; color: var(--texto-claro); border-color: var(--acero-gris);">INICIAR SYS</a>
+                <a href="https://wa.me/584127330382" class="nav-btn" style="background: transparent; color: var(--blanco); border: 1px solid var(--texto-gris); text-align: center;">EMPEZAR GRATIS</a>
             </div>
 
-            <!-- Plan Silver -->
-            <div class="reveal delay-1 tech-card blue-accent" style="width: 260px; display: flex; flex-direction: column; text-align: left;">
-                <h3 style="color: var(--azul-neon); font-family: monospace;">[SILVER_CORE]</h3>
-                <div style="font-size: 2.8rem; font-weight: 900; margin: 10px 0; color: var(--texto-claro);">$14.99</div>
-                <ul style="font-size: 0.9rem; color: var(--texto-muted); list-style: none; padding: 0; flex-grow: 1; line-height: 2.2;">
-                    <li><i class="fas fa-check" style="color: var(--azul-neon); margin-right: 8px;"></i> Todo lo Básico</li>
-                    <li><i class="fas fa-check" style="color: var(--azul-neon); margin-right: 8px;"></i> Vitrina de Ofertas</li>
-                    <li><i class="fas fa-check" style="color: var(--azul-neon); margin-right: 8px;"></i> Pin Destacado</li>
+            <div class="reveal delay-1" style="background: var(--tarjeta-metal); padding: 40px; border-radius: 8px; width: 260px; border-top: 4px solid #4da6ff; display: flex; flex-direction: column; box-shadow: 0 10px 20px rgba(0,0,0,0.4);">
+                <h3 style="color: #4da6ff;">SILVER</h3>
+                <div style="margin: 15px 0;">
+                    <span style="text-decoration: line-through; color: var(--texto-gris); font-size: 1.2rem; margin-right: 8px;">$35</span>
+                    <span style="font-size: 2.5rem; font-weight: 900; color: var(--blanco);">$25</span>
+                    <span style="font-size: 1rem; color: var(--texto-gris); margin-left: 4px;">/mensual</span>
+                </div>
+                <div style="font-size: 0.9rem; font-weight: bold; margin-bottom: 15px; color: var(--texto-gris);">IDEAL PARA VENTAS</div>
+                <ul style="text-align: left; font-size: 0.85rem; color: var(--texto-gris); list-style: none; padding: 0; flex-grow: 1; line-height: 2;">
+                    <li>✅ Todo lo del plan Básico</li>
+                    <li>💎 Perfil Premium</li>
+                    <li>📸 Ofertas flash Diarias</li>
+                    <li>🌟 Pin destacado en el mapa</li>
+                    <li>🎧 Soporte</li>
                 </ul>
-                <a href="https://wa.me/584127330382" class="nav-btn" style="text-align: center; background: var(--azul-iparts); color: white; border: none;">UPGRADE</a>
+                <a href="https://wa.me/584127330382" class="nav-btn" style="background: var(--azul-iparts); color: white; text-align: center;">SOLICITAR INFO</a>
             </div>
 
-            <!-- Plan Gold (Destacado) -->
-            <div class="reveal delay-2 tech-card" style="width: 280px; display: flex; flex-direction: column; text-align: left; transform: scale(1.05); z-index: 10; border: 2px solid var(--dorado-gold); box-shadow: 0 0 30px rgba(255,215,0,0.15);">
-                <div style="position: absolute; top: 0; right: 0; background: var(--dorado-gold); color: #000; padding: 5px 15px; font-size: 0.7rem; font-weight: 900; border-bottom-left-radius: 8px;">OVERCLOCK</div>
-                <h3 style="color: var(--dorado-gold); font-family: monospace;">[GOLD_V8]</h3>
-                <div style="font-size: 2.8rem; font-weight: 900; margin: 10px 0; color: var(--texto-claro);">$19.99</div>
-                <ul style="font-size: 0.9rem; color: var(--texto-muted); list-style: none; padding: 0; flex-grow: 1; line-height: 2.2;">
-                    <li><i class="fas fa-bolt" style="color: var(--dorado-gold); margin-right: 8px;"></i> Radar Prioritario</li>
-                    <li><i class="fas fa-bolt" style="color: var(--dorado-gold); margin-right: 8px;"></i> Solicitudes Directas</li>
-                    <li><i class="fas fa-bolt" style="color: var(--dorado-gold); margin-right: 8px;"></i> Analytics Hub</li>
+            <div class="reveal delay-2" style="background: var(--tarjeta-metal); padding: 40px; border-radius: 8px; width: 260px; border: 2px solid var(--dorado-gold); transform: scale(1.05); z-index: 1; position: relative; display: flex; flex-direction: column; box-shadow: 0 0 30px rgba(255,215,0,0.1);">
+                <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--dorado-gold); color: black; padding: 5px 15px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">MÁS POPULAR</div>
+                <h3 style="color: var(--dorado-gold);">GOLD</h3>
+                <div style="margin: 15px 0;">
+                    <span style="text-decoration: line-through; color: var(--texto-gris); font-size: 1.2rem; margin-right: 8px;">$45</span>
+                    <span style="font-size: 2.5rem; font-weight: 900; color: var(--blanco);">$35</span>
+                    <span style="font-size: 1rem; color: var(--texto-gris); margin-left: 4px;">/mensual</span>
+                </div>
+                <div style="font-size: 0.9rem; font-weight: bold; margin-bottom: 15px; color: var(--texto-gris);">MÁXIMO PODER</div>
+                <ul style="text-align: left; font-size: 0.85rem; color: var(--texto-gris); list-style: none; padding: 0; flex-grow: 1; line-height: 2;">
+                    <li>✅ Todo lo de planes anteriores</li>
+                    <li>🔔 Recibe pedidos específicos</li>
+                    <li>💎 Perfil Premium</li>
+                    <li>📊 Métricas de mercado</li>
+                    <li>🎧 Soporte directo</li>
                 </ul>
-                <a href="https://wa.me/584127330382" class="nav-btn" style="text-align: center;">ACTIVAR V8</a>
+                <a href="https://wa.me/584127330382" class="nav-btn" style="text-align: center;">CONSULTAR CUPO</a>
             </div>
 
-            <!-- Plan Platinum -->
-            <div class="reveal delay-3 tech-card" style="width: 260px; display: flex; flex-direction: column; text-align: left; border-top: 4px solid #e5e4e2; opacity: 0.8;">
-                <h3 style="color: #e5e4e2; font-family: monospace;">[PLATINUM]</h3>
-                <div style="font-size: 2.8rem; font-weight: 900; margin: 10px 0; color: var(--texto-claro);">$49.99</div>
-                <ul style="font-size: 0.9rem; color: var(--texto-muted); list-style: none; padding: 0; flex-grow: 1; line-height: 2.2;">
-                    <li><i class="fas fa-gem" style="color: #e5e4e2; margin-right: 8px;"></i> Servidor VIP</li>
-                    <li><i class="fas fa-gem" style="color: #e5e4e2; margin-right: 8px;"></i> Soporte Dedicado</li>
+            <div class="reveal delay-3" style="background: var(--tarjeta-metal); padding: 40px; border-radius: 8px; width: 260px; border-top: 4px solid #e5e4e2; display: flex; flex-direction: column; opacity: 0.9; box-shadow: 0 10px 20px rgba(0,0,0,0.4);">
+                <h3 style="color: #e5e4e2;">PLATINUM</h3>
+                <div style="margin: 15px 0;">
+                    <span style="text-decoration: line-through; color: var(--texto-gris); font-size: 1.2rem; margin-right: 8px;">$80</span>
+                    <span style="font-size: 2.5rem; font-weight: 900; color: var(--blanco);">$60</span>
+                    <span style="font-size: 1rem; color: var(--texto-gris); margin-left: 4px;">/mensual</span>
+                </div>
+                <div style="font-size: 0.9rem; font-weight: bold; margin-bottom: 15px; color: var(--texto-gris);">EXCLUSIVIDAD</div>
+                <ul style="text-align: left; font-size: 0.85rem; color: var(--texto-gris); list-style: none; padding: 0; flex-grow: 1; line-height: 2;">
+                    <li>✅ Todo lo de planes anteriores</li>
+                    <li>👑 Soporte VIP Personalizado</li>
                 </ul>
-                <a href="https://wa.me/584127330382" class="nav-btn" style="text-align: center; background: #e5e4e2; color: #000; border: none;">CONTACTAR</a>
+                <a href="https://wa.me/584127330382" class="nav-btn" style="background: #e5e4e2; color: black; text-align: center;">CONTACTAR</a>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER INDUSTRIAL -->
-    <footer style="background: #0a0a0c; color: var(--texto-muted); padding: 80px 6% 40px; text-align: center; border-top: 2px solid var(--azul-iparts);">
-        <div class="reveal" style="margin-bottom: 60px; border-bottom: 1px solid var(--acero-gris); padding-bottom: 60px;">
-            <h2 style="font-size: 2.5rem; color: var(--dorado-gold); text-transform: uppercase; font-weight: 900;">Sistema Operativo en Línea</h2>
-            <p style="margin-bottom: 30px;">Acopla tu inventario a la red de repuestos más avanzada de la región.</p>
+    <footer style="background: #050505; color: white; padding: 80px 6% 40px; text-align: center; border-top: 2px solid var(--borde-industrial);">
+        <div class="reveal" style="margin-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 60px;">
+            <h2 style="font-size: 2.5rem; color: var(--dorado-gold);">¿Listo para optimizar tu búsqueda?</h2>
+            <p style="margin-bottom: 30px; opacity: 0.9; color: var(--texto-gris);">Únete a la red de repuestos más inteligente de la ciudad.</p>
             <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 20px;">
-                <a href="https://wa.me/584127330382?text=Hola,%20quiero%20afiliar%20mi%20tienda%20a%20iParts." class="nav-btn">
-                    <i class="fas fa-terminal"></i> Iniciar Conexión
+                <a href="https://wa.me/584127330382?text=Hola,%20quiero%20afiliar%20mi%20tienda%20a%20iParts." class="nav-btn" style="padding: 0 28px; display: inline-flex; align-items: center; justify-content: center; height: 46px; margin: 0;">
+                    Afiliar mi Tienda
                 </a>
             
-                <a href="https://play.google.com/store/apps/details?id=com.diegoor12.iparts" target="_blank" style="display: inline-flex; height: 46px; border-radius: 4px; overflow: hidden; border: 1px solid var(--acero-gris);">
+                <a href="https://play.google.com/store/apps/details?id=com.diegoor12.iparts" target="_blank" style="display: inline-flex; align-items: center; height: 46px; overflow: hidden; border-radius: 4px; border: 1px solid var(--borde-industrial);">
                     <img alt="Disponible en Google Play" 
                          src="https://play.google.com/intl/en_us/badges/static/images/badges/es-419_badge_web_generic.png" 
-                         style="height: 65px; width: auto; margin: -9px;"/>
+                         style="height: 68px; width: auto; margin: 0 -10px;"/>
                 </a>
             </div>
         </div>
         <div style="display: flex; flex-wrap: wrap; justify-content: space-around; gap: 40px; text-align: left;">
             <div>
-                <h3 style="color: var(--texto-claro); font-family: monospace; font-size: 1.5rem;">> iParts_v2</h3>
-                <p style="max-width: 250px; font-size: 0.9rem;">Plataforma de geolocalización y telemetría para el mercado automotriz.</p>
+                <h3 style="color: var(--dorado-gold);">iParts</h3>
+                <p style="max-width: 250px; opacity: 0.7;">Tecnología de geolocalización para la industria de repuestos.</p>
             </div>
             <div>
-                <h4 style="color: var(--dorado-gold);">Terminal de Contacto</h4>
-                <p style="font-family: monospace;"><i class="fas fa-envelope" style="color: var(--azul-neon);"></i> soporte@infoiparts.lat</p>
-                <p style="font-family: monospace;"><i class="fas fa-phone" style="color: var(--azul-neon);"></i> +58 412-7330382</p>
+                <h4>Soporte</h4>
+                <p style="color: var(--texto-gris);">📧 soporte@infoiparts.lat</p>
+                <p style="color: var(--texto-gris);">📲 +58 412-7330382</p>
             </div>
         </div>
-        <div style="margin-top: 60px; padding-top: 20px; font-family: monospace; font-size: 0.8rem;">
-            <p>© 2026 iParts Data Systems. Todos los derechos reservados.</p>
-            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 10px;">
-                <a href="https://infoiparts.lat/terminos" style="color: var(--texto-muted); text-decoration: none;">/Términos_Legales</a>
-                <a href="https://infoiparts.lat/privacidad" style="color: var(--texto-muted); text-decoration: none;">/Privacidad_Datos</a>
+        <div style="margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
+            <p style="opacity: 0.5; font-size: 0.9rem; margin-bottom: 10px;">
+                © 2026 iParts. Todos los derechos reservados.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <a href="https://infoiparts.lat/terminos" style="color: white; opacity: 0.4; text-decoration: none; font-size: 0.8rem; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='0.4'">
+                    Términos y Condiciones
+                </a>
+                <a href="https://infoiparts.lat/privacidad" style="color: white; opacity: 0.4; text-decoration: none; font-size: 0.8rem; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='0.4'">
+                    Política de Privacidad
+                </a>
             </div>
         </div>
     </footer>
 
-    <!-- SCRIPT ANIMACIONES SCROLL -->
     <script>
-        const observerOptions = { threshold: 0.15 };
+        const observerOptions = {
+            threshold: 0.15
+        };
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -540,80 +627,79 @@
                 }
             });
         }, observerOptions);
+
         document.querySelectorAll('.reveal').forEach((el) => {
             observer.observe(el);
         });
     </script>
 
-    <!-- TOAST DE NOTIFICACIONES (ESTILO TECNOLÓGICO) -->
-    <div id="notification-toast" style="position: fixed; bottom: 20px; left: 20px; background: var(--metal-placa); padding: 15px 20px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); display: flex; align-items: center; gap: 15px; z-index: 9999; transform: translateY(150%); transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); border-left: 4px solid var(--dorado-gold); border-top: 1px solid var(--acero-gris); border-right: 1px solid var(--acero-gris); max-width: 320px; pointer-events: none;">
-        <div id="notif-icon-bg" style="background: var(--asfalto-oscuro); color: var(--dorado-gold); width: 40px; height: 40px; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid var(--acero-gris);">
-            <i class="fas fa-satellite-dish" id="notif-icon" style="font-size: 1rem;"></i>
-        </div>
-        <div>
-            <p id="notif-text" style="margin: 0; font-size: 0.85rem; color: var(--texto-claro); line-height: 1.4; font-family: monospace;"></p>
-            <span id="notif-time" style="font-size: 0.7rem; color: var(--azul-neon); font-weight: 900; letter-spacing: 1px;"></span>
-        </div>
+<div id="notification-toast" style="position: fixed; bottom: 20px; left: 20px; background: var(--tarjeta-metal); padding: 15px 20px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); display: flex; align-items: center; gap: 15px; z-index: 9999; transform: translateY(150%); transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); border-left: 5px solid #FFD700; border-top: 1px solid var(--borde-industrial); border-right: 1px solid var(--borde-industrial); border-bottom: 1px solid var(--borde-industrial); max-width: 320px; pointer-events: none;">
+    <div id="notif-icon-bg" style="background: var(--fondo-oscuro); color: white; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid var(--borde-industrial);">
+        <i class="fas fa-store" id="notif-icon" style="font-size: 0.9rem;"></i>
     </div>
+    <div>
+        <p id="notif-text" style="margin: 0; font-size: 0.85rem; color: var(--texto-claro); line-height: 1.4;"></p>
+        <span id="notif-time" style="font-size: 0.7rem; color: var(--texto-gris); font-weight: 500;"></span>
+    </div>
+</div>
 
-    <!-- SCRIPT DE NOTIFICACIONES -->
-    <script>
-        const tiendas = [
-            "Filtros y Lubricantes El Puente",
-            "Répreca (Suplinca)",
-            "Moto Repuestos El Primo",
-            "Multiservicios Vehimax",
-            "Carlos Fuenmayor Diesel",
-            "Taller J&C Chrysler",
-            "Tresna C.A",
-            "Repuestos RZ",
-            "Asia Motors",
-            "Embragues Luk",
-            "Electro Auto Los Olivos",
-            "Gruas RM2",
-            "Accesorios Santa Clara",
-            "Inversiones GILCAR C.A"
-        ];
+<script>
+    const tiendas = [
+        "Filtros y Lubricantes El Puente",
+        "Répreca (Suplinca)",
+        "Moto Repuestos El Primo",
+        "Multiservicios Vehimax",
+        "Carlos Fuenmayor Repuestos Diesel",
+        "Taller J&C Especialistas en Chrysler",
+        "Tresna C.A",
+        "Repuestos RZ",
+        "Asia Motors",
+        "Embragues Luk",
+        "Electro Auto Los Olivos",
+        "Gruas RM2",
+        "Repuestos y accesorios Santa Clara",
+        "Inversiones GILCAR C.A"
+    ];
 
-        const variantes = [
-            { msg: "conectado a la red iParts.", label: "NUEVO NODO", icon: "fa-network-wired", color: "#FFD700" },
-            { msg: "verificación de taller exitosa.", label: "SISTEMA OK", icon: "fa-shield-check", color: "#00c853" },
-            { msg: "sincronizando stock en BD.", label: "DATOS ACTUALIZADOS", icon: "fa-database", color: "#0088ff" },
-            { msg: "activó protocolo de rebajas.", label: "ALERTA PRECIO", icon: "fa-tags", color: "#ff3333" }
-        ];
+    const variantes = [
+        { msg: "se acaba de afiliar a iParts.", label: "¡NUEVO!", icon: "fa-store-alt", color: "#FFD700" },
+        { msg: "ya es una Tienda Verificada.", label: "VERIFICADO", icon: "fa-check-circle", color: "#00c853" },
+        { msg: "actualizó su inventario.", label: "HACE 2 MIN", icon: "fa-sync-alt", color: "#4da6ff" },
+        { msg: "activó ofertas especiales.", label: "PROMO", icon: "fa-tag", color: "#ff4d4d" }
+    ];
 
-        const toast = document.getElementById('notification-toast');
-        const text = document.getElementById('notif-text');
-        const timeLabel = document.getElementById('notif-time');
-        const icon = document.getElementById('notif-icon');
-        const iconBg = document.getElementById('notif-icon-bg');
+    const toast = document.getElementById('notification-toast');
+    const text = document.getElementById('notif-text');
+    const timeLabel = document.getElementById('notif-time');
+    const icon = document.getElementById('notif-icon');
+    const iconBg = document.getElementById('notif-icon-bg');
 
-        function showNotification() {
-            const tienda = tiendas[Math.floor(Math.random() * tiendas.length)];
-            const variante = variantes[Math.floor(Math.random() * variantes.length)];
-            
-            text.innerHTML = `<strong style="color: #fff;">[${tienda}]</strong><br>${variante.msg}`;
-            timeLabel.innerText = variante.label;
-            toast.style.borderLeftColor = variante.color;
-            icon.className = `fas ${variante.icon}`;
-            iconBg.style.color = variante.color;
-            
-            toast.style.transform = "translateY(0)";
-            
-            setTimeout(() => {
-                toast.style.transform = "translateY(150%)";
-            }, 5500);
-        }
+    function showNotification() {
+        const tienda = tiendas[Math.floor(Math.random() * tiendas.length)];
+        const variante = variantes[Math.floor(Math.random() * variantes.length)];
+        
+        text.innerHTML = `<strong style="color: var(--blanco);">${tienda}</strong> ${variante.msg}`;
+        timeLabel.innerText = variante.label;
+        toast.style.borderLeftColor = variante.color;
+        icon.className = `fas ${variante.icon}`;
+        iconBg.style.color = variante.color;
+        
+        toast.style.transform = "translateY(0)";
+        
+        setTimeout(() => {
+            toast.style.transform = "translateY(150%)";
+        }, 5500);
+    }
 
-        function triggerRandomly() {
-            const randomDelay = Math.floor(Math.random() * (18000 - 10000) + 10000);
-            setTimeout(() => {
-                showNotification();
-                triggerRandomly();
-            }, randomDelay);
-        }
+    function triggerRandomly() {
+        const randomDelay = Math.floor(Math.random() * (18000 - 10000) + 10000);
+        setTimeout(() => {
+            showNotification();
+            triggerRandomly();
+        }, randomDelay);
+    }
 
-        setTimeout(triggerRandomly, 4000);
-    </script>
+    setTimeout(triggerRandomly, 4000);
+</script>
 </body>
 </html>
