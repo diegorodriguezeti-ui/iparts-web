@@ -122,7 +122,7 @@
         .hero h1 { font-size: 3.5rem; margin-bottom: 20px; font-weight: 900; line-height: 1.1; letter-spacing: -1px; }
         .hero p { font-size: 1.3rem; color: var(--texto-gris); margin-bottom: 30px; }
 
-        /* 3. CARRUSEL INFINITO */
+        /* 3. CARRUSEL INFINITO REPARADO */
         .aliados-section {
             padding: 40px 0;
             background: #050505; 
@@ -130,13 +130,21 @@
             border-bottom: 2px solid var(--borde-industrial);
         }
 
+        .slider-container {
+            overflow: hidden;
+            width: 100%;
+        }
+
         .slider {
             display: flex;
-            width: calc(250px * 26); 
-            animation: scroll 45s linear infinite;
+            /* El ancho es el tamaño de cada slide (210px total) x cantidad total de logos en el HTML (28) */
+            width: calc(210px * 28); 
+            animation: scroll 40s linear infinite;
         }
-        
-        .slider:hover { animation-play-state: paused; }
+
+        .slider:hover { 
+            animation-play-state: paused; 
+        }
 
         .slide {
             width: 180px;
@@ -146,7 +154,7 @@
             justify-content: center;
             background: var(--blanco); 
             border-radius: 8px; 
-            margin: 0 15px;
+            margin: 0 15px; /* Esto suma 30px al ancho, total 210px por slide */
             padding: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             border: 2px solid var(--borde-industrial);
@@ -162,18 +170,24 @@
 
         .slide img:hover { transform: scale(1.08); }
 
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            /* Se mueve la mitad exacta del contenedor (14 logos) para hacer un bucle perfecto */
+            100% { transform: translateX(calc(-210px * 14)); }
+        }
+
         /* --- GALERÍA 3D INTERACTIVA --- */
         .gallery-wrapper {
             position: relative;
             width: 100%;
-            height: 550px; /* Altura ajustada */
+            height: 550px; 
             display: flex;
             justify-content: center;
             align-items: center;
             perspective: 1200px;
             overflow: hidden;
             margin-top: 20px;
-            touch-action: pan-y; /* Permite scroll vertical pero detecta swipe horizontal */
+            touch-action: pan-y; 
         }
 
         .gallery-item {
@@ -195,18 +209,16 @@
             background: #000;
         }
 
-        /* Título Dinámico Fuera del 3D para que sea SIEMPRE visible */
         .dynamic-gallery-title {
             text-align: center;
             color: var(--dorado-gold);
             font-size: 1.5rem;
             font-weight: 900;
             margin: 20px 0 15px 0;
-            min-height: 35px; /* Evita que brinque la pantalla al cambiar */
+            min-height: 35px; 
             transition: opacity 0.3s ease;
         }
 
-        /* Controles de la galería */
         .gallery-controls {
             display: flex;
             justify-content: center;
@@ -241,7 +253,6 @@
             .hero-mockup { justify-content: center; }
             .hero h1 { font-size: 2.5rem; }
             
-            /* Ajustes para móviles de la galería 3D */
             .gallery-wrapper { height: 450px; }
             .gallery-item { width: 200px; }
             .dynamic-gallery-title { font-size: 1.2rem; }
@@ -290,7 +301,7 @@
                         backface-visibility: hidden; 
                         will-change: transform;">
                 
-                <img src="assets/v2_app_mapa.webp" onerror="this.src='assets/app_mapa.png'" alt="Mapa iParts" 
+                <img src="assets/app_mapa.png" onerror="this.src='assets/app_mapa.webp'" alt="Mapa iParts" 
                      style="width: 100%; height: 100%; object-fit: cover; display: block; position: relative; z-index: 2; image-rendering: high-quality;">
             </div>
         </div>
@@ -298,36 +309,39 @@
     
     <section class="aliados-section">
         <p style="text-align:center; color:var(--texto-gris); font-size:0.8rem; text-transform:uppercase; letter-spacing:2px; margin-bottom:30px; font-weight: 800;">Tiendas Aliadas</p>
-        <div class="slider-container" style="overflow:hidden; padding: 10px 0;">
+        <div class="slider-container">
             <div class="slider">
-                <div class="slide"><img src="assets/assets logos/logo2.png" onclick="mostrarFomo('Embragues LUK')"></div>
-                <div class="slide"><img src="assets/assets logos/logo3.png" onclick="mostrarFomo('Emprendimiento Carlos Fuenmayor')"></div>
-                <div class="slide"><img src="assets/assets logos/logo4.png" onclick="mostrarFomo('Filtros y Lubricantes El Puente')"></div>
-                <div class="slide"><img src="assets/assets logos/logo5.png" onclick="mostrarFomo('Grúas RM2')"></div>
-                <div class="slide"><img src="assets/assets logos/logo6.png" onclick="mostrarFomo('Electro Auto Los Olivos')"></div>
-                <div class="slide"><img src="assets/assets logos/logo7.png" onclick="mostrarFomo('Multiservicios Vehimax')"></div>
-                <div class="slide"><img src="assets/assets logos/logo8.png" onclick="mostrarFomo('Repreca (Suplinca)')"></div>
-                <div class="slide"><img src="assets/assets logos/logo9.png" onclick="mostrarFomo('Repuestos RZ')"></div>
-                <div class="slide"><img src="assets/assets logos/logo10.png" onclick="mostrarFomo('Repuestos y Accesorios Santa Clara')"></div>
-                <div class="slide"><img src="assets/assets logos/logo11.png" onclick="mostrarFomo('Taller J&C')"></div>
-                <div class="slide"><img src="assets/assets logos/logo12.png" onclick="mostrarFomo('Tresna')"></div>
-                <div class="slide"><img src="assets/assets logos/logo13.png" onclick="mostrarFomo('Asia Motors')"></div>
-                <div class="slide"><img src="assets/assets logos/logo14.png" onclick="mostrarFomo('Inversiones GILCAR C.A')"></div>
+                <!-- Set 1 (14 logos) -->
+                <div class="slide"><img src="assets/assets logos/logo1.png" onclick="mostrarFomo('Moto Repuestos El Primo')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo2.png" onclick="mostrarFomo('Embragues LUK')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo3.png" onclick="mostrarFomo('Emprendimiento Carlos Fuenmayor')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo4.png" onclick="mostrarFomo('Filtros y Lubricantes El Puente')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo5.png" onclick="mostrarFomo('Grúas RM2')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo6.png" onclick="mostrarFomo('Electro Auto Los Olivos')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo7.png" onclick="mostrarFomo('Multiservicios Vehimax')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo8.png" onclick="mostrarFomo('Repreca (Suplinca)')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo9.png" onclick="mostrarFomo('Repuestos RZ')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo10.png" onclick="mostrarFomo('Repuestos y Accesorios Santa Clara')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo11.png" onclick="mostrarFomo('Taller J&C')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo12.png" onclick="mostrarFomo('Tresna')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo13.png" onclick="mostrarFomo('Asia Motors')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo14.png" onclick="mostrarFomo('Inversiones GILCAR C.A')" onerror="this.style.display='none'"></div>
 
-                <div class="slide"><img src="assets/assets logos/logo1.png" onclick="mostrarFomo('Moto Repuestos El Primo')"></div>
-                <div class="slide"><img src="assets/assets logos/logo2.png" onclick="mostrarFomo('Embragues LUK')"></div>
-                <div class="slide"><img src="assets/assets logos/logo3.png" onclick="mostrarFomo('Emprendimiento Carlos Fuenmayor')"></div>
-                <div class="slide"><img src="assets/assets logos/logo4.png" onclick="mostrarFomo('Filtros y Lubricantes El Puente')"></div>
-                <div class="slide"><img src="assets/assets logos/logo5.png" onclick="mostrarFomo('Grúas RM2')"></div>
-                <div class="slide"><img src="assets/assets logos/logo6.png" onclick="mostrarFomo('Electro Auto Los Olivos')"></div>
-                <div class="slide"><img src="assets/assets logos/logo7.png" onclick="mostrarFomo('Multiservicios Vehimax')"></div>
-                <div class="slide"><img src="assets/assets logos/logo8.png" onclick="mostrarFomo('Repreca (Suplinca)')"></div>
-                <div class="slide"><img src="assets/assets logos/logo9.png" onclick="mostrarFomo('Repuestos RZ')"></div>
-                <div class="slide"><img src="assets/assets logos/logo10.png" onclick="mostrarFomo('Repuestos y Accesorios Santa Clara')"></div>
-                <div class="slide"><img src="assets/assets logos/logo11.png" onclick="mostrarFomo('Taller J&C')"></div>
-                <div class="slide"><img src="assets/assets logos/logo12.png" onclick="mostrarFomo('Tresna')"></div>
-                <div class="slide"><img src="assets/assets logos/logo13.png" onclick="mostrarFomo('Asia Motors')"></div>
-                <div class="slide"><img src="assets/assets logos/logo14.png" onclick="mostrarFomo('Inversiones GILCAR C.A')"></div>
+                <!-- Set 2 (14 logos clonados para el bucle infinito) -->
+                <div class="slide"><img src="assets/assets logos/logo1.png" onclick="mostrarFomo('Moto Repuestos El Primo')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo2.png" onclick="mostrarFomo('Embragues LUK')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo3.png" onclick="mostrarFomo('Emprendimiento Carlos Fuenmayor')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo4.png" onclick="mostrarFomo('Filtros y Lubricantes El Puente')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo5.png" onclick="mostrarFomo('Grúas RM2')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo6.png" onclick="mostrarFomo('Electro Auto Los Olivos')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo7.png" onclick="mostrarFomo('Multiservicios Vehimax')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo8.png" onclick="mostrarFomo('Repreca (Suplinca)')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo9.png" onclick="mostrarFomo('Repuestos RZ')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo10.png" onclick="mostrarFomo('Repuestos y Accesorios Santa Clara')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo11.png" onclick="mostrarFomo('Taller J&C')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo12.png" onclick="mostrarFomo('Tresna')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo13.png" onclick="mostrarFomo('Asia Motors')" onerror="this.style.display='none'"></div>
+                <div class="slide"><img src="assets/assets logos/logo14.png" onclick="mostrarFomo('Inversiones GILCAR C.A')" onerror="this.style.display='none'"></div>
             </div>
         </div>
     </section>
@@ -373,7 +387,6 @@
         <div class="reveal delay-1">
             <div class="gallery-wrapper" id="galleryWrapper">
                 
-                <!-- Los títulos ahora se guardan en data-title para extraerlos -->
                 <div class="gallery-item" data-title="📍 Mapa inteligente">
                     <img src="assets/v2_captura_mapa.jpg" onerror="this.src='assets/captura_mapa_galeria.jpg'">
                 </div>
@@ -397,7 +410,7 @@
             </div>
 
             <!-- TÍTULO DINÁMICO (Siempre visible) -->
-            <div id="dynamicTitle" class="dynamic-gallery-title">📍 Radar de Tiendas</div>
+            <div id="dynamicTitle" class="dynamic-gallery-title">📍 Mapa inteligente</div>
 
             <!-- Botones de Navegación -->
             <div class="gallery-controls">
@@ -412,7 +425,7 @@
         const galleryItems = document.querySelectorAll('.gallery-item');
         const dynamicTitle = document.getElementById('dynamicTitle');
         const galleryWrapper = document.getElementById('galleryWrapper');
-        let currentIndex = 2; // Empezamos en la imagen del medio
+        let currentIndex = 2; 
 
         function updateGallery() {
             const isMobile = window.innerWidth <= 768;
@@ -421,13 +434,11 @@
             galleryItems.forEach((item, index) => {
                 let offset = index - currentIndex;
 
-                // Animación 3D
                 let x = offset * xOffsetMultiplier; 
                 let scale = 1 - Math.abs(offset) * 0.15; 
                 let z = -Math.abs(offset) * 150; 
                 let rotateY = offset * -25; 
 
-                // Si está muy lejos la ocultamos suavemente
                 let opacity = Math.abs(offset) > 2 ? 0 : (1 - Math.abs(offset) * 0.3);
 
                 item.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${rotateY}deg) scale(${scale})`;
@@ -436,7 +447,6 @@
 
                 if(offset === 0) {
                     item.style.filter = "brightness(1)";
-                    // Actualizar el título dinámico con pequeño fade
                     dynamicTitle.style.opacity = 0;
                     setTimeout(() => {
                         dynamicTitle.innerText = item.getAttribute('data-title');
@@ -448,7 +458,6 @@
             });
         }
 
-        // Clics directos en las imágenes
         galleryItems.forEach((item, index) => {
             item.addEventListener('click', () => {
                 currentIndex = index;
@@ -470,7 +479,6 @@
             }
         }
 
-        // --- SISTEMA DE SWIPE (DESLIZAR EN CELULARES) ---
         let touchStartX = 0;
         let touchEndX = 0;
 
@@ -484,15 +492,14 @@
         }, {passive: true});
 
         function handleSwipe() {
-            const swipeThreshold = 50; // Distancia mínima para considerar que deslizó
+            const swipeThreshold = 50; 
             if (touchStartX - touchEndX > swipeThreshold) {
-                nextGallery(); // Deslizó a la izquierda
+                nextGallery(); 
             } else if (touchEndX - touchStartX > swipeThreshold) {
-                prevGallery(); // Deslizó a la derecha
+                prevGallery(); 
             }
         }
 
-        // Iniciar la galería
         updateGallery();
         window.addEventListener('resize', updateGallery);
     </script>
