@@ -16,6 +16,7 @@
             --borde-industrial: #333333;
             --texto-claro: #e0e0e0;
             --texto-gris: #a0a0a0;
+            --exito-neon: #00c853; 
         }
 
         body {
@@ -137,7 +138,6 @@
 
         .slider {
             display: flex;
-            /* El ancho es el tamaño de cada slide (210px total) x cantidad total de logos en el HTML (28) */
             width: calc(210px * 28); 
             animation: scroll 40s linear infinite;
         }
@@ -154,7 +154,7 @@
             justify-content: center;
             background: var(--blanco); 
             border-radius: 8px; 
-            margin: 0 15px; /* Esto suma 30px al ancho, total 210px por slide */
+            margin: 0 15px;
             padding: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             border: 2px solid var(--borde-industrial);
@@ -172,7 +172,6 @@
 
         @keyframes scroll {
             0% { transform: translateX(0); }
-            /* Se mueve la mitad exacta del contenedor (14 logos) para hacer un bucle perfecto */
             100% { transform: translateX(calc(-210px * 14)); }
         }
 
@@ -504,14 +503,17 @@
         window.addEventListener('resize', updateGallery);
     </script>
 
-    <!-- PLANES CON PRECIOS TACHADOS Y ETIQUETA /mensual -->
+    <!-- PLANES DE PRECIOS CENTRALIZADOS HACIA LA PRUEBA GRATUITA -->
     <section id="planes" style="padding: 80px 10%; background: #161616; text-align: center;">
         <div class="reveal">
             <h2 style="color: var(--blanco); font-size: 2.2rem; font-weight: 800; margin-bottom: 10px;">Haz crecer tu negocio con iParts</h2>
-            <p style="color: var(--texto-gris); margin-bottom: 50px;">Potencia la visibilidad de tu stock y conecta con clientes de alto valor.</p>
+            <p style="color: var(--texto-gris); margin-bottom: 50px; font-size: 1.1rem;">
+                Potencia la visibilidad de tu stock. Prueba todo el poder de iParts <strong style="color: var(--exito-neon);">GRATIS por 30 días</strong> y luego decide.
+            </p>
         </div>
     
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+            <!-- PLAN BÁSICO -->
             <div class="reveal" style="background: var(--tarjeta-metal); padding: 40px; border-radius: 8px; width: 260px; border-top: 4px solid var(--borde-industrial); display: flex; flex-direction: column; box-shadow: 0 10px 20px rgba(0,0,0,0.4);">
                 <h3 style="color: var(--texto-gris);">Básico</h3>
                 <div style="margin: 15px 0;">
@@ -523,9 +525,9 @@
                     <li>📍 Visibilidad en el Mapa</li>
                     <li>🛠️ Perfil Comercial</li>
                 </ul>
-                <a href="https://wa.me/584127330382" class="nav-btn" style="background: transparent; color: var(--blanco); border: 1px solid var(--texto-gris); text-align: center;">EMPEZAR GRATIS</a>
             </div>
 
+            <!-- PLAN SILVER -->
             <div class="reveal delay-1" style="background: var(--tarjeta-metal); padding: 40px; border-radius: 8px; width: 260px; border-top: 4px solid #4da6ff; display: flex; flex-direction: column; box-shadow: 0 10px 20px rgba(0,0,0,0.4);">
                 <h3 style="color: #4da6ff;">SILVER</h3>
                 <div style="margin: 15px 0;">
@@ -541,9 +543,9 @@
                     <li>🌟 Pin destacado en el mapa</li>
                     <li>🎧 Soporte</li>
                 </ul>
-                <a href="https://wa.me/584127330382" class="nav-btn" style="background: var(--azul-iparts); color: white; text-align: center;">SOLICITAR INFO</a>
             </div>
 
+            <!-- PLAN GOLD (DESTACADO) -->
             <div class="reveal delay-2" style="background: var(--tarjeta-metal); padding: 40px; border-radius: 8px; width: 260px; border: 2px solid var(--dorado-gold); transform: scale(1.05); z-index: 1; position: relative; display: flex; flex-direction: column; box-shadow: 0 0 30px rgba(255,215,0,0.1);">
                 <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--dorado-gold); color: black; padding: 5px 15px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">MÁS POPULAR</div>
                 <h3 style="color: var(--dorado-gold);">GOLD</h3>
@@ -560,9 +562,9 @@
                     <li>📊 Métricas de mercado</li>
                     <li>🎧 Soporte directo</li>
                 </ul>
-                <a href="https://wa.me/584127330382" class="nav-btn" style="text-align: center;">CONSULTAR CUPO</a>
             </div>
 
+            <!-- PLAN PLATINUM -->
             <div class="reveal delay-3" style="background: var(--tarjeta-metal); padding: 40px; border-radius: 8px; width: 260px; border-top: 4px solid #e5e4e2; display: flex; flex-direction: column; opacity: 0.9; box-shadow: 0 10px 20px rgba(0,0,0,0.4);">
                 <h3 style="color: #e5e4e2;">PLATINUM</h3>
                 <div style="margin: 15px 0;">
@@ -575,8 +577,17 @@
                     <li>✅ Todo lo de planes anteriores</li>
                     <li>👑 Soporte VIP Personalizado</li>
                 </ul>
-                <a href="https://wa.me/584127330382" class="nav-btn" style="background: #e5e4e2; color: black; text-align: center;">CONTACTAR</a>
             </div>
+        </div>
+
+        <!-- GRAN BOTÓN CENTRAL (CALL TO ACTION) -->
+        <div class="reveal delay-4" style="margin-top: 60px;">
+            <a href="https://wa.me/584127330382?text=Hola%20tengo%20una%20tienda%20y%20quiero%20iniciar%20mi%20prueba%20gratuita" class="nav-btn" style="padding: 18px 40px; font-size: 1.2rem; letter-spacing: 2px; box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);">
+                🚀 INICIAR MI MES DE PRUEBA
+            </a>
+            <p style="color: var(--texto-gris); font-size: 0.9rem; margin-top: 35px;">
+                <i class="fas fa-shield-alt" style="color: var(--exito-neon); margin-right: 5px;"></i> Cancela cuando quieras.
+            </p>
         </div>
     </section>
 
