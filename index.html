@@ -246,6 +246,30 @@
             border-color: var(--dorado-gold);
         }
 
+        /* --- ESTILOS DEL BOTÓN CTA PRINCIPAL --- */
+        .cta-btn-main {
+            display: inline-block;
+            background: var(--dorado-gold);
+            color: black;
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 50px;
+            transition: 0.3s;
+            padding: 18px 40px; 
+            font-size: 1.2rem; 
+            letter-spacing: 2px; 
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            text-align: center;
+        }
+
+        .cta-btn-main:hover {
+            background: #e6c200;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
+        }
+
+        /* RESPONSIVE (CELULARES) */
         @media (max-width: 968px) {
             .hero { flex-direction: column; text-align: center; padding: 80px 20px; }
             .hero-content { text-align: center; max-width: 100%; }
@@ -255,6 +279,15 @@
             .gallery-wrapper { height: 450px; }
             .gallery-item { width: 200px; }
             .dynamic-gallery-title { font-size: 1.2rem; }
+
+            /* Ajustes del botón CTA para que no se rompa en celulares */
+            .cta-btn-main {
+                padding: 15px 20px;
+                font-size: 0.95rem;
+                letter-spacing: 1px;
+                width: 90%; /* Toma casi todo el ancho disponible */
+                max-width: 350px;
+            }
         }
     </style>
 </head>
@@ -582,8 +615,8 @@
 
         <!-- GRAN BOTÓN CENTRAL (CALL TO ACTION) -->
         <div class="reveal delay-4" style="margin-top: 60px;">
-            <a href="https://wa.me/584127330382?text=Hola%20tengo%20una%20tienda%20y%20quiero%20iniciar%20mi%20prueba%20gratuita" class="nav-btn" style="padding: 18px 40px; font-size: 1.2rem; letter-spacing: 2px; box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);">
-                🚀 INICIAR MI MES DE PRUEBA
+            <a href="https://wa.me/584127330382?text=Hola%20tengo%20una%20tienda%20y%20quiero%20iniciar%20mi%20prueba%20gratuita" class="cta-btn-main">
+                🚀 INICIAR MI PRUEBA GRATIS DE 30 DÍAS
             </a>
             <p style="color: var(--texto-gris); font-size: 0.9rem; margin-top: 35px;">
                 <i class="fas fa-shield-alt" style="color: var(--exito-neon); margin-right: 5px;"></i> Cancela cuando quieras.
