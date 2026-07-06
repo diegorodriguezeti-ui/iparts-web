@@ -3,40 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Privacidad - iParts APP</title>
+    <title>Política de Privacidad - iParts</title>
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
-        h1 { color: #0056b3; border-bottom: 2px solid #0056b3; padding-bottom: 10px; }
-        h2 { color: #333; margin-top: 25px; }
-        p { margin-bottom: 15px; }
-        .footer { font-size: 0.8em; color: #777; margin-top: 40px; border-top: 1px solid #ccc; padding-top: 10px; }
+        /* Estilos profesionales alineados con los términos */
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.7; 
+            color: #1a202c; 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 40px 20px; 
+            background-color: #f7fafc; 
+        }
+        .container { 
+            background-color: #ffffff; 
+            padding: 40px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+        }
+        h1 { 
+            color: #002d55; 
+            border-bottom: 3px solid #002d55; 
+            padding-bottom: 15px; 
+            font-size: 24px; 
+            text-align: center; 
+            text-transform: uppercase; 
+        }
+        h2 { 
+            color: #2d3748; 
+            margin-top: 30px; 
+            font-size: 18px; 
+            border-left: 5px solid #F59E0B; 
+            padding-left: 15px; 
+        }
+        p, li { 
+            font-size: 15px; 
+            text-align: justify; 
+            color: #4a5568; 
+        }
+        ul { padding-left: 20px; }
+        .version { 
+            font-weight: bold; 
+            color: #718096; 
+            margin-bottom: 30px; 
+            text-align: center; 
+            font-size: 13px; 
+        }
+        .highlight { color: #002d55; font-weight: 700; }
+        .footer { 
+            font-size: 0.85em; 
+            color: #a0aec0; 
+            margin-top: 50px; 
+            border-top: 1px solid #e2e8f0; 
+            padding-top: 20px; 
+            text-align: center; 
+        }
+        strong { color: #1a202c; }
     </style>
 </head>
 <body>
 
-    <h1>Política de Privacidad de iParts APP</h1>
-    <p><strong>Última actualización: 23 de febrero de 2026</strong></p>
+    <div class="container">
+        <h1>Política de Privacidad</h1>
+        <p class="version">Última actualización: Julio de 2026<br>iParts APP - ROD INVEST GRUP, C.A.</p>
 
-    <p>En <strong>iParts</strong>, la privacidad de nuestros usuarios en Maracaibo y toda Venezuela es nuestra prioridad. Esta política describe cómo manejamos su información personal.</p>
+        <p>En <strong>iParts</strong>, valoramos la privacidad de nuestros usuarios en Venezuela. Esta política detalla de forma transparente cómo recolectamos y protegemos su información personal para brindarle la mejor experiencia en la búsqueda de repuestos.</p>
 
-    <h2>1. Información que Recolectamos</h2>
-    <ul>
-        <li><strong>Datos de Cuenta:</strong> Nombre, correo electrónico y teléfono proporcionados en el registro.</li>
-        <li><strong>Ubicación:</strong> Acceso al GPS en tiempo real para geolocalización de tiendas y rutas.</li>
-        <li><strong>Solicitudes de Repuestos:</strong> Información sobre marcas y modelos de vehículos ingresada por el usuario.</li>
-    </ul>
+        <h2>1. Información que Recolectamos</h2>
+        <p>Para operar nuestro Marketplace de forma eficiente, procesamos los siguientes datos:</p>
+        <ul>
+            <li><strong>Identificación Básica:</strong> Nombre completo, dirección de correo electrónico y número de WhatsApp.</li>
+            <li><strong>Geolocalización:</strong> Coordenadas GPS en tiempo real para mostrar tiendas cercanas y calcular rutas de llegada.</li>
+            <li><strong>Identificadores de Dispositivo (Tokens):</strong> Un código único generado para el envío de <strong>notificaciones push</strong> sobre el estado de sus pedidos.</li>
+            <li><strong>Contenido Multimedia:</strong> Acceso a la cámara o galería exclusivamente para que el vendedor suba fotos de sus productos. <span class="highlight">Importante: Solo procesamos la imagen que usted selecciona manualmente; iParts no accede a su biblioteca privada de fotos.</span></li>
+        </ul>
 
-    <h2>2. Uso de los Datos</h2>
-    <p>Utilizamos su información para conectar usuarios con tiendas de repuestos y gestionar el sistema de "Solicitudes a tiendas", limitando la respuesta a las 5 tiendas más veloces para evitar saturación.</p>
+        <h2>2. Uso de la Información</h2>
+        <p>Sus datos personales tienen un propósito estrictamente operativo para:</p>
+        <ul>
+            <li>Conectar sus solicitudes de repuestos con las tiendas especialistas.</li>
+            <li>Gestionar el sistema de <strong>reputación y calificaciones</strong> basado en transacciones reales.</li>
+            <li>Optimizar la logística y distancias mostradas en el mapa.</li>
+        </ul>
 
-    <h2>3. Seguridad y Terceros</h2>
-    <p>Sus datos se almacenan de forma segura en <strong>Supabase</strong>. No vendemos ni cedemos sus datos personales a terceros con fines publicitarios.</p>
+        <h2>3. Almacenamiento y Protección</h2>
+        <p>Toda la información es resguardada bajo los estándares de seguridad de <strong>Supabase</strong> y <strong>Google Firebase</strong>. Aplicamos políticas de seguridad a nivel de fila (RLS), garantizando que solo el dueño de la cuenta pueda interactuar con sus datos personales.</p>
 
-    <h2>4. Derechos del Usuario</h2>
-    <p>Usted puede solicitar la eliminación de su cuenta y datos personales escribiendo a <strong>soporte@infoiparts.lat</strong>.</p>
+        <h2>4. Sus Derechos y Control</h2>
+        <p>Usted mantiene el control total sobre su privacidad:</p>
+        <ul>
+            <li><strong>Eliminación de Datos:</strong> Puede solicitar el borrado definitivo de su cuenta y toda la información asociada escribiendo a <strong>soporte@infoiparts.lat</strong>.</li>
+            <li><strong>Permisos:</strong> Puede revocar en cualquier momento el acceso al GPS o a las notificaciones desde los ajustes de su teléfono Android o iOS.</li>
+        </ul>
 
-    <div class="footer">
-        <p>iParts APP - Desarrollada por Diego Rodríguez. Maracaibo, Venezuela.</p>
+        <h2>5. Terceros</h2>
+        <p>iParts <span class="highlight">NO vende ni alquila sus datos personales con fines publicitarios</span>. Solo compartimos datos técnicos con proveedores necesarios para el servicio, como Google Maps API (para el mapa) y Expo/Firebase (para las notificaciones).</p>
+
+        <div class="footer">
+            <p>iParts App - El aliado de tu camino.<br>
+            Maracaibo, Venezuela.<br>
+            Contacto de Privacidad: <strong>soporte@infoiparts.lat</strong></p>
+        </div>
     </div>
 
 </body>
