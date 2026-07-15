@@ -285,7 +285,7 @@
                 padding: 15px 20px;
                 font-size: 0.95rem;
                 letter-spacing: 1px;
-                width: 90%; /* Toma casi todo el ancho disponible */
+                width: 90%; 
                 max-width: 350px;
             }
         }
@@ -535,91 +535,59 @@
         window.addEventListener('resize', updateGallery);
     </script>
 
-    <!-- PLANES DE PRECIOS CENTRALIZADOS HACIA LA PRUEBA GRATUITA -->
+    <!-- NUEVOS PLANES (SOLO 2 OPCIONES) -->
     <section id="planes" style="padding: 80px 10%; background: #161616; text-align: center;">
         <div class="reveal">
             <h2 style="color: var(--blanco); font-size: 2.2rem; font-weight: 800; margin-bottom: 10px;">Haz crecer tu negocio con iParts</h2>
-            <p style="color: var(--texto-gris); margin-bottom: 50px; font-size: 1.1rem;">
-                Potencia la visibilidad de tu stock. Prueba todo el poder de iParts <strong style="color: var(--exito-neon);">GRATIS por 30 días</strong> y luego decide.
+            <p style="color: var(--texto-gris); margin-bottom: 50px; font-size: 1.1rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Elige el modelo que mejor se adapte a tu negocio. Ambos planes incluyen todas las funciones de iParts, tú decides cómo pagar.
             </p>
         </div>
     
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
-            <!-- PLAN BÁSICO -->
-            <div class="reveal" style="background: var(--tarjeta-metal); padding: 40px; border-radius: 8px; width: 260px; border-top: 4px solid var(--borde-industrial); display: flex; flex-direction: column; box-shadow: 0 10px 20px rgba(0,0,0,0.4);">
-                <h3 style="color: var(--texto-gris);">Básico</h3>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;">
+            
+            <!-- PLAN GRATIS (COMISIÓN) -->
+            <div class="reveal" style="background: var(--tarjeta-metal); padding: 40px; border-radius: 8px; width: 300px; border-top: 4px solid var(--borde-industrial); display: flex; flex-direction: column; box-shadow: 0 10px 20px rgba(0,0,0,0.4); position: relative;">
+                <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--borde-industrial); color: var(--blanco); padding: 5px 15px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; white-space: nowrap;">PAGA SOLO SI VENDES</div>
+                
+                <h3 style="color: var(--texto-gris); margin-top: 10px;">PLAN GRATIS</h3>
                 <div style="margin: 15px 0;">
-                    <span style="text-decoration: line-through; color: var(--texto-gris); font-size: 1.2rem; margin-right: 8px;">$5</span>
-                    <span style="font-size: 2.5rem; font-weight: 900; color: var(--blanco);">$0</span>
+                    <span style="font-size: 2.8rem; font-weight: 900; color: var(--blanco);">$0</span>
                     <span style="font-size: 1rem; color: var(--texto-gris); margin-left: 4px;">/mensual</span>
                 </div>
+                <div style="font-size: 0.9rem; font-weight: bold; margin-bottom: 15px; color: var(--texto-gris);">COMISIÓN POR VENTA</div>
+                
                 <ul style="text-align: left; font-size: 0.85rem; color: var(--texto-gris); list-style: none; padding: 0; flex-grow: 1; line-height: 2;">
-                    <li>📍 Visibilidad en el Mapa</li>
-                    <li>🛠️ Perfil Comercial</li>
+                    <li><i class="fas fa-check" style="color: var(--dorado-gold); margin-right: 5px;"></i> Acceso total a todas las funciones (Mapa, Ofertas Flash, pedidos y cotizaciones)</li>
+                    <li><i class="fas fa-check" style="color: var(--dorado-gold); margin-right: 5px;"></i> Publicación y visibilidad completa en iParts</li>
+                    <li style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--borde-industrial);">
+                        <strong style="color: var(--blanco); font-size: 1rem;">Solo pagas el 6% de comisión</strong> por cada venta concretada (sin importar el monto)
+                    </li>
                 </ul>
+                <a href="https://wa.me/584127330382?text=Hola,%20quiero%20empezar%20gratis%20en%20iParts%20pagando%20comisiones" class="nav-btn" style="background: transparent; color: var(--blanco); border: 1px solid var(--texto-gris); text-align: center; margin-top: 20px;">EMPEZAR GRATIS</a>
             </div>
 
-            <!-- PLAN SILVER -->
-            <div class="reveal delay-1" style="background: var(--tarjeta-metal); padding: 40px; border-radius: 8px; width: 260px; border-top: 4px solid #4da6ff; display: flex; flex-direction: column; box-shadow: 0 10px 20px rgba(0,0,0,0.4);">
-                <h3 style="color: #4da6ff;">SILVER</h3>
+            <!-- PLAN PRO (SUSCRIPCIÓN) - DESTACADO -->
+            <div class="reveal delay-1" style="background: var(--tarjeta-metal); padding: 40px; border-radius: 8px; width: 300px; border: 2px solid var(--dorado-gold); transform: scale(1.05); z-index: 1; position: relative; display: flex; flex-direction: column; box-shadow: 0 0 30px rgba(255,215,0,0.15);">
+                <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--dorado-gold); color: black; padding: 5px 15px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; white-space: nowrap;">EL MÁS RENTABLE</div>
+                
+                <h3 style="color: var(--dorado-gold); margin-top: 10px;">PLAN PRO</h3>
                 <div style="margin: 15px 0;">
-                    <span style="text-decoration: line-through; color: var(--texto-gris); font-size: 1.2rem; margin-right: 8px;">$35</span>
-                    <span style="font-size: 2.5rem; font-weight: 900; color: var(--blanco);">$25</span>
+                    <span style="font-size: 2.8rem; font-weight: 900; color: var(--blanco);">$35</span>
                     <span style="font-size: 1rem; color: var(--texto-gris); margin-left: 4px;">/mensual</span>
                 </div>
-                <div style="font-size: 0.9rem; font-weight: bold; margin-bottom: 15px; color: var(--texto-gris);">IDEAL PARA VENTAS</div>
+                <div style="font-size: 0.9rem; font-weight: bold; margin-bottom: 15px; color: var(--dorado-gold);">0% COMISIONES</div>
+                
                 <ul style="text-align: left; font-size: 0.85rem; color: var(--texto-gris); list-style: none; padding: 0; flex-grow: 1; line-height: 2;">
-                    <li>✅ Todo lo del plan Básico</li>
-                    <li>💎 Perfil Premium</li>
-                    <li>📸 Ofertas flash Diarias</li>
-                    <li>🌟 Pin destacado en el mapa</li>
-                    <li>🎧 Soporte</li>
+                    <li><i class="fas fa-check" style="color: var(--dorado-gold); margin-right: 5px;"></i> Acceso total a todas las funciones (Mapa, Ofertas Flash, pedidos y cotizaciones)</li>
+                    <li><i class="fas fa-check" style="color: var(--dorado-gold); margin-right: 5px;"></i> Publicación y visibilidad completa en iParts</li>
+                    <li style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--borde-industrial);">
+                        <strong style="color: var(--blanco); font-size: 1rem;">0% de comisiones</strong> (te quedas con el 100% de tus ventas)
+                    </li>
                 </ul>
+                <a href="https://wa.me/584127330382?text=Hola,%20quiero%20unirme%20al%20Plan%20Pro%20de%20iParts" class="nav-btn" style="text-align: center; margin-top: 20px;">UNIRME AL PLAN PRO</a>
             </div>
 
-            <!-- PLAN GOLD (DESTACADO) -->
-            <div class="reveal delay-2" style="background: var(--tarjeta-metal); padding: 40px; border-radius: 8px; width: 260px; border: 2px solid var(--dorado-gold); transform: scale(1.05); z-index: 1; position: relative; display: flex; flex-direction: column; box-shadow: 0 0 30px rgba(255,215,0,0.1);">
-                <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--dorado-gold); color: black; padding: 5px 15px; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">MÁS POPULAR</div>
-                <h3 style="color: var(--dorado-gold);">GOLD</h3>
-                <div style="margin: 15px 0;">
-                    <span style="text-decoration: line-through; color: var(--texto-gris); font-size: 1.2rem; margin-right: 8px;">$45</span>
-                    <span style="font-size: 2.5rem; font-weight: 900; color: var(--blanco);">$35</span>
-                    <span style="font-size: 1rem; color: var(--texto-gris); margin-left: 4px;">/mensual</span>
-                </div>
-                <div style="font-size: 0.9rem; font-weight: bold; margin-bottom: 15px; color: var(--texto-gris);">MÁXIMO PODER</div>
-                <ul style="text-align: left; font-size: 0.85rem; color: var(--texto-gris); list-style: none; padding: 0; flex-grow: 1; line-height: 2;">
-                    <li>✅ Todo lo de planes anteriores</li>
-                    <li>🔔 Recibe pedidos específicos</li>
-                    <li>💎 Perfil Premium</li>
-                    <li>📊 Métricas de mercado</li>
-                    <li>🎧 Soporte directo</li>
-                </ul>
-            </div>
-
-            <!-- PLAN PLATINUM -->
-            <div class="reveal delay-3" style="background: var(--tarjeta-metal); padding: 40px; border-radius: 8px; width: 260px; border-top: 4px solid #e5e4e2; display: flex; flex-direction: column; opacity: 0.9; box-shadow: 0 10px 20px rgba(0,0,0,0.4);">
-                <h3 style="color: #e5e4e2;">PLATINUM</h3>
-                <div style="margin: 15px 0;">
-                    <span style="text-decoration: line-through; color: var(--texto-gris); font-size: 1.2rem; margin-right: 8px;">$80</span>
-                    <span style="font-size: 2.5rem; font-weight: 900; color: var(--blanco);">$60</span>
-                    <span style="font-size: 1rem; color: var(--texto-gris); margin-left: 4px;">/mensual</span>
-                </div>
-                <div style="font-size: 0.9rem; font-weight: bold; margin-bottom: 15px; color: var(--texto-gris);">EXCLUSIVIDAD</div>
-                <ul style="text-align: left; font-size: 0.85rem; color: var(--texto-gris); list-style: none; padding: 0; flex-grow: 1; line-height: 2;">
-                    <li>✅ Todo lo de planes anteriores</li>
-                    <li>👑 Soporte VIP Personalizado</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- GRAN BOTÓN CENTRAL (CALL TO ACTION) -->
-        <div class="reveal delay-4" style="margin-top: 60px;">
-            <a href="https://wa.me/584127330382?text=Hola%20tengo%20una%20tienda%20y%20quiero%20iniciar%20mi%20prueba%20gratuita" class="cta-btn-main">
-                🚀 INICIAR MI PRUEBA GRATIS DE 30 DÍAS
-            </a>
-            <p style="color: var(--texto-gris); font-size: 0.9rem; margin-top: 35px;">
-                <i class="fas fa-shield-alt" style="color: var(--exito-neon); margin-right: 5px;"></i> Cancela cuando quieras.
-            </p>
         </div>
     </section>
 
